@@ -36,8 +36,16 @@ public class AcceleratedAuroraFactory implements AuroraFactory {
         RenderScript rs = RenderScript.create(this.context);
 
         Allocation allocatedInput = Allocation.createFromBitmap(rs, input);
+        // A histogram should contain 256 values, the occurrences of every color off the input
+        Allocation allocatedHistogram = Allocation.createSized(rs, Element.U8_4(rs), 256);
 
         ScriptIntrinsicHistogram histogramScript = ScriptIntrinsicHistogram.create(rs, Element.U8_4(rs));
-        histogramScript.setOutput();
+        histogramScript.setOutput(allocatedHistogram);
+
+        // Destroy all objects that we used for this script
+        allocatedHistogram.destroy();
+        allocatedInput.destroy();
+        histogramScript.destroy();
+        rs.destroy();
     }
 }
