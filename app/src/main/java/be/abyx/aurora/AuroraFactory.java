@@ -1,5 +1,6 @@
 package be.abyx.aurora;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
@@ -13,12 +14,12 @@ import android.graphics.drawable.Drawable;
 public interface AuroraFactory {
     /**
      * Create a new Aurora whose color is based upon the colour that occurs the most in the given
-     * drawable. This results in a Drawable that perfectly matches the input to this function.
+     * Bitmap. This results in a Drawable that perfectly matches the input to this function.
      *
-     * @param input A Drawable whose most occurring colour should be used for building an Aurora.
+     * @param input A Bitmap whose most occurring colour should be used for building an Aurora.
      * @return An Aurora that's based upon the input's most occurring colour.
      */
-    public Drawable createAuroraBasedUponDrawable(Drawable input);
+    public Drawable createAuroraBasedUponDrawable(Bitmap input);
 
     /**
      * Create a new Aurora whose color is equal to the given input.
