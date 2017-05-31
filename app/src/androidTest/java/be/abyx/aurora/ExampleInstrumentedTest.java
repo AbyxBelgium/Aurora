@@ -42,7 +42,7 @@ public class ExampleInstrumentedTest {
         Bitmap greenImage = ((BitmapDrawable) greenDrawable).getBitmap();
 
         output = (int) mostOccurringColour.invoke(factory, greenImage);
-        //assertEquals("Colour should be equal to green", Color.argb());
+        assertEquals("Colour should be equal to green", Color.argb(255, 95, 135, 0), output);
     }
 
     /**
