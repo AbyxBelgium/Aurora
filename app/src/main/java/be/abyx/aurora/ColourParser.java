@@ -20,7 +20,7 @@ import java.util.List;
 public class ColourParser {
     public List<Integer> parseFile(InputStream data) throws IOException, JSONException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[4096];
         int length;
 
         while ((length = data.read(buffer)) != -1) {

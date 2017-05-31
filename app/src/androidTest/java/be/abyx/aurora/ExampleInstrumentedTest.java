@@ -32,7 +32,7 @@ public class ExampleInstrumentedTest {
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
 
-        Method mostOccurringColour = getMethodFromClass(factory.getClass(), "determineMostOccurringColour", Bitmap.class);
+        Method mostOccurringColour = getMethodFromClass(factory.getClass(), "determineDominantColour", Bitmap.class);
         int output = (int) mostOccurringColour.invoke(factory, redImage);
 
         assertEquals("Colour should be equal to red", Color.argb(255, 255, 0, 0), output);
@@ -42,6 +42,7 @@ public class ExampleInstrumentedTest {
         Bitmap greenImage = ((BitmapDrawable) greenDrawable).getBitmap();
 
         output = (int) mostOccurringColour.invoke(factory, greenImage);
+        //assertEquals("Colour should be equal to green", Color.argb());
     }
 
     /**
