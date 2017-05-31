@@ -11,13 +11,13 @@ import java.util.List;
  * @author Pieter Verschaffelt
  */
 public class ColourPalette {
-    private List<Color> colours;
+    private List<Integer> colours;
 
-    public ColourPalette(List<Color> colours) {
+    public ColourPalette(List<Integer> colours) {
         this.colours = colours;
     }
 
-    public Color matchToClosestColour(Color input) {
+    public Integer matchToClosestColour(Integer input) {
         return null;
     }
 }
