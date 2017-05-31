@@ -2,21 +2,19 @@ package be.abyx.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.mock.MockContext;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.InputStream;
 import java.lang.reflect.Method;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static org.junit.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -30,12 +28,20 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red, null);
-        AuroraFactory factory = new AcceleratedAuroraFactory(appContext);
+        AuroraFactory factory = new DefaultAuroraFactory(appContext);
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
 
         Method mostOccurringColour = getMethodFromClass(factory.getClass(), "determineMostOccurringColour", Bitmap.class);
-        mostOccurringColour.invoke(factory, redImage);
+        int output = (int) mostOccurringColour.invoke(factory, redImage);
+
+        assertEquals("Colour should be equal to red", Color.argb(255, 255, 0, 0), output);
+
+        Drawable greenDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.mostly_green, null);
+
+        Bitmap greenImage = ((BitmapDrawable) greenDrawable).getBitmap();
+
+        output = (int) mostOccurringColour.invoke(factory, greenImage);
     }
 
     /**
