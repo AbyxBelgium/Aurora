@@ -33,6 +33,6 @@ public class DefaultAuroraRenderer implements AuroraRenderer {
     }
 
     private int getInterpolatedColour(int value, int row, int totalRows) {
-        return (int) (value + (256 - value) * (1.0 - ((double) row) / ((double) totalRows)));
+        return (int) (value * (1.0 - ((double) row) / ((double) totalRows)));
     }
 }

@@ -27,13 +27,14 @@ public class DefaultAuroraFactory implements AuroraFactory {
     }
 
     @Override
-    public Drawable createAuroraBasedUponDrawable(Bitmap input) {
+    public Bitmap createAuroraBasedUponDrawable(Bitmap input) {
         return null;
     }
 
     @Override
-    public Drawable createAuroraBasedUponColour(Color colour) {
-        return null;
+    public Bitmap createAuroraBasedUponColour(int colour) {
+        AuroraRenderer renderer = new DefaultAuroraRenderer();
+        return renderer.renderGradient(400, 800, colour);
     }
 
     private int determineDominantColour(Bitmap input) {

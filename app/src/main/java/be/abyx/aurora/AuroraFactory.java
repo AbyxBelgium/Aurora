@@ -19,7 +19,7 @@ public interface AuroraFactory {
      * @param input A Bitmap whose most occurring colour should be used for building an Aurora.
      * @return An Aurora that's based upon the input's most occurring colour.
      */
-    public Drawable createAuroraBasedUponDrawable(Bitmap input);
+    public Bitmap createAuroraBasedUponDrawable(Bitmap input);
 
     /**
      * Create a new Aurora whose color is equal to the given input.
@@ -27,5 +27,5 @@ public interface AuroraFactory {
      * @param colour Colour that should be used for rendering the Aurora.
      * @return An Aurora based upon the given input colour.
      */
-    public Drawable createAuroraBasedUponColour(Color colour);
+    public Bitmap createAuroraBasedUponColour(int colour);
 }
