@@ -8,9 +8,9 @@ import android.graphics.Color;
  *
  * @author Pieter Verschaffelt
  */
-public class DefaultAuroraRenderer implements AuroraRenderer {
+public class SimpleGradientAurora implements AuroraType {
     @Override
-    public Bitmap renderGradient(int width, int height, int colour) {
+    public Bitmap render(int width, int height, Integer colour) {
         int[] pixels = new int[width * height];
 
         int redInitial = Color.red(colour);

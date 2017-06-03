@@ -2,12 +2,7 @@ package be.abyx.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.util.SparseIntArray;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This factory is a concrete AuroraFactory implementation that uses a simple CPU-based algorithm
@@ -32,9 +27,19 @@ public class DefaultAuroraFactory implements AuroraFactory {
     }
 
     @Override
+    public Bitmap createAuroraBasedUponDrawable(Bitmap input, AuroraType type) {
+        return null;
+    }
+
+    @Override
     public Bitmap createAuroraBasedUponColour(int colour) {
-        AuroraRenderer renderer = new DefaultAuroraRenderer();
-        return renderer.renderGradient(400, 800, colour);
+        AuroraType type = new SimpleGradientAurora();
+        return createAuroraBasedUponColour(colour, type);
+    }
+
+    @Override
+    public Bitmap createAuroraBasedUponColour(int colour, AuroraType type) {
+        return null;
     }
 
     private int determineDominantColour(Bitmap input) {
