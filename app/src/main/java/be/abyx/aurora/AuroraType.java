@@ -8,5 +8,5 @@ import android.graphics.Bitmap;
  * @author Pieter Verschaffelt
  */
 public interface AuroraType {
-    public Bitmap render(int width, int height, Integer colour);
+    public Bitmap render(int width, int height, int colour);
 }

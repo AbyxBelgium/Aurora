@@ -39,7 +39,7 @@ public class DefaultAuroraFactory implements AuroraFactory {
 
     @Override
     public Bitmap createAuroraBasedUponColour(int colour, AuroraType type, int width, int height) {
-        return null;
+        return type.render(width, height, colour);
     }
 
     private int determineDominantColour(Bitmap input) {

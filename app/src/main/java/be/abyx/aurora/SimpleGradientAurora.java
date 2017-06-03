@@ -10,7 +10,7 @@ import android.graphics.Color;
  */
 public class SimpleGradientAurora implements AuroraType {
     @Override
-    public Bitmap render(int width, int height, Integer colour) {
+    public Bitmap render(int width, int height, int colour) {
         int[] pixels = new int[width * height];
 
         int redInitial = Color.red(colour);
