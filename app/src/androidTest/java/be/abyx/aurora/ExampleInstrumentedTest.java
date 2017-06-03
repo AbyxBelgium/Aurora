@@ -62,7 +62,7 @@ public class ExampleInstrumentedTest {
         Method mostOccurringColour = getMethodFromClass(factory.getClass(), "determineDominantColour", Bitmap.class);
         int output = (int) mostOccurringColour.invoke(factory, redImage);
 
-        Bitmap gradient = factory.createAuroraBasedUponColour(output);
+        Bitmap gradient = factory.createAuroraBasedUponColour(output, 400, 800);
 
         saveImageToExternalStorage(gradient);
     }
