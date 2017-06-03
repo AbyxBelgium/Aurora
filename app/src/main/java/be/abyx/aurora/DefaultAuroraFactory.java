@@ -22,23 +22,23 @@ public class DefaultAuroraFactory implements AuroraFactory {
     }
 
     @Override
-    public Bitmap createAuroraBasedUponDrawable(Bitmap input) {
+    public Bitmap createAuroraBasedUponDrawable(Bitmap input, int width, int height) {
         return null;
     }
 
     @Override
-    public Bitmap createAuroraBasedUponDrawable(Bitmap input, AuroraType type) {
+    public Bitmap createAuroraBasedUponDrawable(Bitmap input, AuroraType type, int width, int height) {
         return null;
     }
 
     @Override
-    public Bitmap createAuroraBasedUponColour(int colour) {
+    public Bitmap createAuroraBasedUponColour(int colour, int width, int height) {
         AuroraType type = new SimpleGradientAurora();
-        return createAuroraBasedUponColour(colour, type);
+        return createAuroraBasedUponColour(colour, type, width, height);
     }
 
     @Override
-    public Bitmap createAuroraBasedUponColour(int colour, AuroraType type) {
+    public Bitmap createAuroraBasedUponColour(int colour, AuroraType type, int width, int height) {
         return null;
     }
 
