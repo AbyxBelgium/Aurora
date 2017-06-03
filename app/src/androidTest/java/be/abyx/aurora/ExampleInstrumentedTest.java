@@ -51,7 +51,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testAuroraRenderer() throws Exception {
+    public void testSimpleGradientAurora() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red, null);
@@ -67,8 +67,24 @@ public class ExampleInstrumentedTest {
         saveImageToExternalStorage(gradient);
     }
 
+    @Test
+    public void testBlurryAurora() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red, null);
+        AuroraFactory factory = new DefaultAuroraFactory(appContext);
+
+        Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
+
+        Method mostOccurringColour = getMethodFromClass(factory.getClass(), "determineDominantColour", Bitmap.class);
+        int output = (int) mostOccurringColour.invoke(factory, redImage);
+
+        Bitmap gradient = factory.createAuroraBasedUponColour(output, new BlurryAurora(appContext), 400, 800);
+
+        saveImageToExternalStorage(gradient);
+    }
+
     private void saveImageToExternalStorage(Bitmap finalBitmap) {
-        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
         File myDir = getInstrumentation().getContext().getExternalFilesDir("gradient");
         myDir.mkdirs();
         Random generator = new Random();

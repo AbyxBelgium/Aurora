@@ -32,6 +32,10 @@ public class BlurryAurora implements AuroraType {
 
         int[] outputPixels = new int[sourceBitmap.getHeight() * sourceBitmap.getWidth()];
 
+        if (BuildConfig.DEBUG) {
+            System.out.print("Progress 0.00%");
+        }
+
         for (int i = 0; i < sourceBitmap.getHeight(); i++) {
             for (int j = 0; j < sourceBitmap.getWidth(); j++) {
                 int pixel = pixels[i * sourceBitmap.getWidth() + j];
@@ -39,6 +43,15 @@ public class BlurryAurora implements AuroraType {
                 hsv[0] = (hsv[0] + hueShift) % 360;
                 outputPixels[i * sourceBitmap.getWidth() + j] = Color.HSVToColor(hsv);
             }
+
+            if (BuildConfig.DEBUG) {
+                double progress = ((double) i) / ((double) sourceBitmap.getHeight());
+                System.out.print("\rProgress " + String.format("%.2f", progress));
+            }
+        }
+
+        if (BuildConfig.DEBUG) {
+            System.out.println("");
         }
 
         return Bitmap.createBitmap(outputPixels, sourceBitmap.getWidth(), sourceBitmap.getHeight(), Bitmap.Config.RGB_565);
