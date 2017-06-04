@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.content.res.ResourcesCompat;
 
 /**
  * An Aurora based upon a blurry image whose hue is shifted to match the hue of a given color.
@@ -25,7 +23,7 @@ public class BlurryAurora implements AuroraType {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inScaled = false;
 
-        Bitmap sourceBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.fancy, opts);
+        Bitmap sourceBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.aurora_fancy_template, opts);
 
         int originalWidth = sourceBitmap.getWidth();
         int originalHeight = sourceBitmap.getHeight();

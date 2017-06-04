@@ -20,7 +20,7 @@ public class ColourPaletteFactory {
     public ColourPalette getDefaultColourPalette() {
         try {
             ColourParser parser = new ColourParser();
-            List<Integer> colours = parser.parseFile(context.getResources().openRawResource(R.raw.colour_palette));
+            List<Integer> colours = parser.parseFile(context.getResources().openRawResource(R.raw.colour_palette_default));
             return new ColourPalette(colours);
         } catch (IOException | JSONException e) {
             throw new RuntimeException("Could not parse default colour palette!");
