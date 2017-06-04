@@ -19,6 +19,14 @@ public class BlurryAurora implements AuroraType {
 
     @Override
     public Bitmap render(int width, int height, int colour) {
+        if (width > 1200) {
+            throw new RuntimeException("Only widths up to 1200 pixels are supported at the moment!");
+        }
+
+        if (height > 1920) {
+            throw new RuntimeException("Only heights up to 1920 pixels are supported at the moment!");
+        }
+
         // Force disable the automatic density scaling
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inScaled = false;

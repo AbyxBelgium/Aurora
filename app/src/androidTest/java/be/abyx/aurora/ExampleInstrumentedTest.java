@@ -97,7 +97,7 @@ public class ExampleInstrumentedTest {
             file.delete();
         try {
             FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 98, out);
             out.flush();
             out.close();
         }
