@@ -2,6 +2,7 @@ package be.abyx.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.content.res.ResourcesCompat;
@@ -20,10 +21,18 @@ public class BlurryAurora implements AuroraType {
 
     @Override
     public Bitmap render(int width, int height, int colour) {
-        BitmapDrawable drawable = (BitmapDrawable) ResourcesCompat.getDrawable(context.getResources(), R.drawable.fancy, null);
-        Bitmap sourceBitmap = drawable.getBitmap();
-        int[] pixels = new int[sourceBitmap.getHeight() * sourceBitmap.getWidth()];
-        sourceBitmap.getPixels(pixels, 0, sourceBitmap.getWidth(), 0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight());
+        // Force disable the automatic density scaling
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inScaled = false;
+
+        Bitmap sourceBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.fancy, opts);
+
+        int originalWidth = sourceBitmap.getWidth();
+        int originalHeight = sourceBitmap.getHeight();
+
+        // Get raw pixel values from the Bitmap
+        int[] pixels = new int[originalWidth * originalHeight];
+        sourceBitmap.getPixels(pixels, 0, originalWidth, 0, 0, originalWidth, originalHeight);
 
         // We're going to use this pixel as a reference for the hue and to determine the amount of shift that should be applied to the hue.
         int referencePixel = pixels[0];
@@ -36,7 +45,7 @@ public class BlurryAurora implements AuroraType {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                int pixel = pixels[i * sourceBitmap.getWidth() + j];
+                int pixel = pixels[i * originalWidth + j];
                 float[] hsv = convertColorToHSV(pixel);
                 hsv[0] = (hsv[0] + hueShift) % 360;
                 outputPixels[i * width + j] = Color.HSVToColor(hsv);
@@ -63,7 +72,7 @@ public class BlurryAurora implements AuroraType {
         float[] referenceHSV = convertColorToHSV(referencePixel);
         float[] destinationHSV = convertColorToHSV(destinationColour);
 
-        return destinationHSV[0] - referenceHSV[0];
+        return (destinationHSV[0] - referenceHSV[0] + 360) % 360;
     }
 
     private float[] convertColorToHSV(int colour) {
