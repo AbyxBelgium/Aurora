@@ -25,7 +25,7 @@ public class BlurryAurora implements AuroraType {
 
         Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.aurora_fancy_template, opts);
         Bitmap sourceBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true);
-        originalBitmap.recycle();
+        //originalBitmap.recycle();
 
         int originalWidth = sourceBitmap.getWidth();
         int originalHeight = sourceBitmap.getHeight();
@@ -43,10 +43,12 @@ public class BlurryAurora implements AuroraType {
 
         DebugSystem.print("Progress 0.00%");
 
+        float[] hsv = new float[3];
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 int pixel = pixels[i * originalWidth + j];
-                float[] hsv = convertColorToHSV(pixel);
+                convertColorToHSV(pixel, hsv);
                 hsv[0] = (hsv[0] + hueShift) % 360;
                 outputPixels[i * width + j] = Color.HSVToColor(hsv);
             }
@@ -69,20 +71,19 @@ public class BlurryAurora implements AuroraType {
      * @return The difference in hue value between the referencePixel and the destinationColour.
      */
     private float getHueShift(int referencePixel, int destinationColour) {
-        float[] referenceHSV = convertColorToHSV(referencePixel);
-        float[] destinationHSV = convertColorToHSV(destinationColour);
+        float[] referenceHSV = new float[3];
+        convertColorToHSV(referencePixel, referenceHSV);
+        float[] destinationHSV = new float[3];
+        convertColorToHSV(destinationColour, destinationHSV);
 
         return (destinationHSV[0] - referenceHSV[0] + 360) % 360;
     }
 
-    private float[] convertColorToHSV(int colour) {
-        float[] referenceHSV = new float[3];
-
+    private void convertColorToHSV(int colour, float[] result) {
         int referenceRed = Color.red(colour);
         int referenceGreen = Color.green(colour);
         int referenceBlue = Color.blue(colour);
 
-        Color.RGBToHSV(referenceRed, referenceGreen, referenceBlue, referenceHSV);
-        return referenceHSV;
+        Color.RGBToHSV(referenceRed, referenceGreen, referenceBlue, result);
     }
 }
