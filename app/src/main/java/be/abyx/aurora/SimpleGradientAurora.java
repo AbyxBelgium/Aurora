@@ -32,6 +32,11 @@ public class SimpleGradientAurora implements AuroraType {
         return Bitmap.createBitmap(pixels, width, height, Bitmap.Config.RGB_565);
     }
 
+    @Override
+    public Bitmap renderParallel(int width, int height, int colour) {
+        return null;
+    }
+
     private int getInterpolatedColour(int value, int row, int totalRows) {
         return (int) (value * (1.0 - ((double) row) / ((double) totalRows)));
     }

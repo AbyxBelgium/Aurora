@@ -62,6 +62,11 @@ public class BlurryAurora implements AuroraType {
         return Bitmap.createBitmap(outputPixels, width, height, Bitmap.Config.RGB_565);
     }
 
+    @Override
+    public Bitmap renderParallel(int width, int height, int colour) {
+        return null;
+    }
+
     /**
      * Calculate the amount of shift that should be applied to the referencePixel to match the
      * destination colour's hue.
