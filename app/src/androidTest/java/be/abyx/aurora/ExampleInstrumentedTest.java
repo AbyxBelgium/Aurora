@@ -72,14 +72,11 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red, null);
-        AuroraFactory factory = new DefaultAuroraFactory(appContext);
+        AuroraFactory factory = new ParallelAuroraFactory(appContext);
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
 
-        Method mostOccurringColour = getMethodFromClass(factory.getClass(), "determineDominantColour", Bitmap.class);
-        int output = (int) mostOccurringColour.invoke(factory, redImage);
-
-        Bitmap gradient = factory.createAuroraBasedUponColour(output, new BlurryAurora(appContext), 1200, 1920);
+        Bitmap gradient = factory.createAuroraBasedUponDrawable(redImage, new BlurryAurora(appContext), 1200, 1920);
 
         saveImageToExternalStorage(gradient);
     }

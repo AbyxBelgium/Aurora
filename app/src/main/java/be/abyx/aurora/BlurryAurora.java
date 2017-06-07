@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.support.v8.renderscript.Allocation;
+import android.support.v8.renderscript.RenderScript;
+import android.support.v8.renderscript.Type;
 
 /**
  * An Aurora based upon a blurry image whose hue is shifted to match the hue of a given color.
@@ -23,6 +26,7 @@ public class BlurryAurora implements AuroraType {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inScaled = false;
 
+        // TODO investigate if we should first init a bitmap with the correct size or not...
         Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.aurora_fancy_template, opts);
         Bitmap sourceBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true);
         //originalBitmap.recycle();
@@ -64,7 +68,44 @@ public class BlurryAurora implements AuroraType {
 
     @Override
     public Bitmap renderParallel(int width, int height, int colour) {
-        return null;
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inScaled = false;
+
+        DebugSystem.startTimer();
+        Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.aurora_fancy_template, opts);
+        Bitmap sourceBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true);
+        DebugSystem.endTimer("Bitmap Factory");
+
+        DebugSystem.startTimer();
+        // We only need access to the first pixel of our sourceBitmap
+        int[] sourcePixel = new int[1];
+        sourceBitmap.getPixels(sourcePixel, 0, sourceBitmap.getWidth(), 0, 0, 1, 1);
+
+        RenderScript rs = RenderScript.create(this.context);
+
+        Allocation input = Allocation.createFromBitmap(rs, sourceBitmap);
+        Type t = input.getType();
+
+        Allocation output = Allocation.createTyped(rs, t);
+
+        ScriptC_hue_shift hueShift = new ScriptC_hue_shift(rs);
+
+        float shift = getHueShift(sourcePixel[0], colour);
+
+        hueShift.set_shift(shift);
+
+        hueShift.forEach_hueShift(input, output);
+        // Reuse the sourceBitmap to save resources (we no longer need it)
+        output.copyTo(sourceBitmap);
+
+        // Destroy all variables because we're done computing
+        output.destroy();
+        input.destroy();
+        hueShift.destroy();
+        rs.destroy();
+        DebugSystem.endTimer("Renderscript");
+
+        return sourceBitmap;
     }
 
     /**

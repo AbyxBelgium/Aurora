@@ -1,17 +1,17 @@
 #pragma version(1)
 #pragma rs java_package_name(be.abyx.aurora)
+// We don't need very high precision floating points
 #pragma rs_fp_relaxed
 
-// Partially based upon https://medium.com/@qhutch/android-simple-and-fast-image-processing-with-renderscript-2fa8316273e1
-
-const float hueShift = 0.0;
+// The value by which the hue must be shifted
+float shift = 0.0;
 
 // Convert a pixel in RGB color space to the HSV color space
 static float3 convertRgbToHsv(float red, float green, float blue) {
     float3 hsv;
 
-    M = max(red, green, blue);
-    m = min(red, green, blue);
+    float M = max(max(red, green), blue);
+    float m = min(min(red, green), blue);
 
     hsv[2] = M;
 
@@ -37,7 +37,7 @@ static float3 convertRgbToHsv(float red, float green, float blue) {
 }
 
 // Convert a pixel in the HSV color space to RGB. Alpha value of the RGB output is always set to 255
-static float4 convertHsvToRgba(float h, float s, float v) {
+static float4 convertHsvToRgb(float h, float s, float v) {
     float4 rgb;
 
     // Set alpha value always to maximum
@@ -45,8 +45,8 @@ static float4 convertHsvToRgba(float h, float s, float v) {
 
     float c = v * s;
 
-    float hNew = H / 60;
-    float x = c * (1 - abs(hNew % 2 - 1))
+    float hNew = h / 60;
+    float x = c * (1 - fabs(fmod(hNew, 2) - 1));
 
     if (hNew <= 1) {
         rgb[0] = c;
@@ -74,7 +74,7 @@ static float4 convertHsvToRgba(float h, float s, float v) {
         rgb[2] = x;
     }
 
-    m = v - c;
+    float m = v - c;
     rgb[0] = rgb[0] + m;
     rgb[1] = rgb[1] + m;
     rgb[2] = rgb[2] + m;
@@ -88,9 +88,9 @@ uchar4 RS_KERNEL hueShift(uchar4 in, uint32_t x, uint32_t y) {
 
     float3 hsv = convertRgbToHsv(f4.r, f4.g, f4.b);
 
-    hsv[0] = (hsv[0] + hueShift) % 360;
+    hsv[0] = fmod(hsv[0] + shift, 360);
 
-    float4 rgb = converHsvToRgb(hsv[0], hsv[1], hsv[2]);
+    float4 rgb = convertHsvToRgb(hsv[0], hsv[1], hsv[2]);
 
     //Put the values in the output uchar4, note that we keep the alpha value
     return rsPackColorTo8888(rgb[0], rgb[1], rgb[2], rgb[3]);

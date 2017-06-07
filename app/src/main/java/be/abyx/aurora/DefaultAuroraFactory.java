@@ -2,6 +2,7 @@ package be.abyx.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Debug;
 import android.util.SparseIntArray;
 
 /**
@@ -45,6 +46,7 @@ public class DefaultAuroraFactory implements AuroraFactory {
     }
 
     private int determineDominantColour(Bitmap input) {
+        DebugSystem.startTimer();
         int totalPixels = input.getWidth() * input.getHeight();
 
         int[] pixels = new int[input.getWidth() * input.getHeight()];
@@ -70,6 +72,7 @@ public class DefaultAuroraFactory implements AuroraFactory {
             }
         }
 
+        DebugSystem.endTimer("Determine Dominant Colour");
         return largestKey;
     }
 }
