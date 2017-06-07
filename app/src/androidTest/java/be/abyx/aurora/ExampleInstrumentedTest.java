@@ -64,7 +64,7 @@ public class ExampleInstrumentedTest {
 
         Bitmap gradient = factory.createAuroraBasedUponColour(output, 400, 800);
 
-        saveImageToExternalStorage(gradient);
+        saveImageToExternalStorage(gradient, Bitmap.CompressFormat.JPEG);
     }
 
     @Test
@@ -78,23 +78,39 @@ public class ExampleInstrumentedTest {
 
         Bitmap gradient = factory.createAuroraBasedUponDrawable(redImage, new BlurryAurora(appContext), 1200, 1920);
 
-        saveImageToExternalStorage(gradient);
+        saveImageToExternalStorage(gradient, Bitmap.CompressFormat.JPEG);
     }
 
-    private void saveImageToExternalStorage(Bitmap finalBitmap) {
+    @Test
+    public void testMagicCrop() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize, null);
+        ImageUtils utils = new ImageUtils(appContext);
+
+        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.75f);
+        saveImageToExternalStorage(cropped, Bitmap.CompressFormat.PNG);
+    }
+
+    private void saveImageToExternalStorage(Bitmap finalBitmap, Bitmap.CompressFormat format) {
         File myDir = getInstrumentation().getContext().getExternalFilesDir("gradient");
         myDir.mkdirs();
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
-        String fname = "Image-" + n + ".jpg";
+        String fname;
+        if (format.equals(Bitmap.CompressFormat.JPEG)) {
+            fname = "Image-" + n + ".jpg";
+        } else {
+            fname = "Image-" + n + ".png";
+        }
         File file = new File(myDir, fname);
         System.out.println(file.getAbsolutePath());
         if (file.exists())
             file.delete();
         try {
             FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 98, out);
+            finalBitmap.compress(format, 100, out);
             out.flush();
             out.close();
         }

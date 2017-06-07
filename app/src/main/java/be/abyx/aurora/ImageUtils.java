@@ -26,43 +26,65 @@ public class ImageUtils {
      *
      * @param input A Bitmap that should be automatically cropped.
      * @param colour The colour of the edges that should be removed.
+     * @param tolerance How much a colour can deviate from the real given value and should still
+     *                  be removed (A value between 0 and 1 where 1 indicates full tolerance).
+     * @return Bitmap A new Bitmap whose corners are removed.
      */
-    public void magicCrop(Bitmap input, int colour) {
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        opts.inScaled = false;
-
-        Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.aurora_fancy_template, opts);
-
-        int width = originalBitmap.getWidth();
-        int height = originalBitmap.getHeight();
+    public Bitmap magicCrop(Bitmap input, int colour, float tolerance) {
+        int width = input.getWidth();
+        int height = input.getHeight();
 
         int[] pixels = new int[width * height];
-        originalBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        input.getPixels(pixels, 0, width, 0, 0, width, height);
 
         // We're working with a Stack-based approach of the Flood Fill algorithm to determine
         // the edges that should get removed.
         Stack<ImageCoordinate> coordinates = new Stack<>();
         // Start filling from the four corners of the image
-        coordinates.push(new ImageCoordinate(0, 0));
         coordinates.push(new ImageCoordinate(0, height - 1));
         coordinates.push(new ImageCoordinate(width - 1, height - 1));
         coordinates.push(new ImageCoordinate(width - 1, 0));
+        coordinates.push(new ImageCoordinate(0, 0));
+
+        int referenceRed = Color.red(colour);
+        int referenceGreen = Color.green(colour);
+        int referenceBlue = Color.blue(colour);
+        int sum = referenceBlue + referenceGreen + referenceRed;
+        float treshold = 3 * 255 * tolerance;
 
         while (!coordinates.isEmpty()) {
             ImageCoordinate current = coordinates.pop();
 
-            if (pixels[current.getY() * height + current.getX()] == colour) {
-                pixels[current.getY() * height + current.getX()] = Color.TRANSPARENT;
+            if (validPosition(current.getX(), current.getY(), width, height) && pixels[current.getY() * width + current.getX()] == colour) {
+                int pixel = pixels[current.getY() * width + current.getX()];
+                int red = Color.red(pixel);
+                int blue = Color.blue(pixel);
+                int green = Color.green(pixel);
 
-                // Reuse current ImageCoordinate-object.
-                current.setY(current.getY() + 1);
-                coordinates.push(current);
-                coordinates.push(new ImageCoordinate(current.getX(), current.getY() - 1));
-                coordinates.push(new ImageCoordinate(current.getX() + 1, current.getY()));
-                coordinates.push(new ImageCoordinate(current.getX() - 1, current.getY()));
+                float difference = Math.abs((red + blue + green) - sum);
+
+                if (difference <= treshold) {
+                    pixels[current.getY() * width + current.getX()] = Color.TRANSPARENT;
+
+                    // Reuse current ImageCoordinate-object.
+                    coordinates.push(new ImageCoordinate(current.getX() + 1, current.getY()));
+                    coordinates.push(new ImageCoordinate(current.getX() - 1, current.getY()));
+                    coordinates.push(new ImageCoordinate(current.getX(), current.getY() - 1));
+                    current.setY(current.getY() + 1);
+                    coordinates.push(current);
+                }
             }
         }
 
-        input.setPixels(pixels, 0, width, 0, 0, width, height);
+        Bitmap output = input.copy(input.getConfig(), true);
+        output.setHasAlpha(true);
+        output.setPixels(pixels, 0, width, 0, 0, width, height);
+
+        return output;
+    }
+
+
+    private boolean validPosition(int x, int y, int width, int height) {
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
 }
