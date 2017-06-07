@@ -6,8 +6,8 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0-alpha"
+        versionCode 2
+        versionName "2.0-alpha"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         renderscriptTargetApi 24
@@ -27,5 +27,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:palette-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 }

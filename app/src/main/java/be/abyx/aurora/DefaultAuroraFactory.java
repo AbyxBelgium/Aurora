@@ -2,7 +2,9 @@ package be.abyx.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Debug;
+import android.support.v7.graphics.Palette;
 import android.util.SparseIntArray;
 
 /**
@@ -13,13 +15,9 @@ import android.util.SparseIntArray;
  */
 public class DefaultAuroraFactory implements AuroraFactory {
     private Context context;
-    private ColourPalette palette;
-    private int accuracy = 50;
 
     public DefaultAuroraFactory(Context context) {
         this.context = context;
-        ColourPaletteFactory paletteFactory = new ColourPaletteFactory(context);
-        palette = paletteFactory.getDefaultColourPalette();
     }
 
     @Override
@@ -46,33 +44,14 @@ public class DefaultAuroraFactory implements AuroraFactory {
     }
 
     private int determineDominantColour(Bitmap input) {
-        DebugSystem.startTimer();
-        int totalPixels = input.getWidth() * input.getHeight();
-
-        int[] pixels = new int[input.getWidth() * input.getHeight()];
-        input.getPixels(pixels, 0, input.getWidth(), 0, 0, input.getWidth(), input.getHeight());
-
-        SparseIntArray colourMap = new SparseIntArray();
-
-        for (int i = 0; i < totalPixels; i += accuracy) {
-            Integer closestColour = palette.matchToClosestColour(pixels[i]);
-            colourMap.put(closestColour, colourMap.get(closestColour, 0) + 1);
-        }
-
-        int largestValue = 0;
-        int largestKey = 0;
-
-        for (int i = 0; i < colourMap.size(); i++) {
-            int key = colourMap.keyAt(i);
-            int value = colourMap.get(key);
-
-            if (value > largestValue) {
-                largestValue = value;
-                largestKey = key;
+        Palette p = Palette.from(input).addFilter(new Palette.Filter() {
+            @Override
+            public boolean isAllowed(int rgb, float[] hsl) {
+                // We don't want black or white as the dominant colour.
+                return rgb != Color.WHITE && rgb != Color.BLACK;
             }
-        }
+        }).generate();
 
-        DebugSystem.endTimer("Determine Dominant Colour");
-        return largestKey;
+        return p.getDominantColor(Color.GRAY);
     }
 }
