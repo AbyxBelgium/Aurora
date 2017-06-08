@@ -26,10 +26,8 @@ public class BlurryAurora implements AuroraType {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inScaled = false;
 
-        // TODO investigate if we should first init a bitmap with the correct size or not...
         Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.raw.aurora_fancy_template, opts);
         Bitmap sourceBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true);
-        //originalBitmap.recycle();
 
         int originalWidth = sourceBitmap.getWidth();
         int originalHeight = sourceBitmap.getHeight();

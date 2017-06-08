@@ -50,7 +50,7 @@ public class ImageUtils {
         int referenceGreen = Color.green(colour);
         int referenceBlue = Color.blue(colour);
         int sum = referenceBlue + referenceGreen + referenceRed;
-        float treshold = 3 * 255 * tolerance;
+        float threshold = 3 * 255 * tolerance;
 
         while (!coordinates.isEmpty()) {
             ImageCoordinate current = coordinates.pop();
@@ -63,7 +63,7 @@ public class ImageUtils {
 
                 float difference = Math.abs((red + blue + green) - sum);
 
-                if (difference <= treshold) {
+                if (difference <= threshold) {
                     pixels[current.getY() * width + current.getX()] = Color.TRANSPARENT;
 
                     // Reuse current ImageCoordinate-object.
