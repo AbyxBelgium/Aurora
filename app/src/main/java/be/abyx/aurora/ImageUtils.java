@@ -55,7 +55,7 @@ public class ImageUtils {
         while (!coordinates.isEmpty()) {
             ImageCoordinate current = coordinates.pop();
 
-            if (validPosition(current.getX(), current.getY(), width, height) && pixels[current.getY() * width + current.getX()] == colour) {
+            if (validPosition(current.getX(), current.getY(), width, height)) {
                 int pixel = pixels[current.getY() * width + current.getX()];
                 int red = Color.red(pixel);
                 int blue = Color.blue(pixel);
