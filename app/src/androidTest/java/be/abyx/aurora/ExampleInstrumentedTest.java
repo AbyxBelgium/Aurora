@@ -92,6 +92,17 @@ public class ExampleInstrumentedTest {
         saveImageToExternalStorage(cropped, Bitmap.CompressFormat.PNG);
     }
 
+    @Test
+    public void testCircleShape() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize, null);
+
+
+        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+        saveImageToExternalStorage(cropped, Bitmap.CompressFormat.PNG);
+    }
+
     private void saveImageToExternalStorage(Bitmap finalBitmap, Bitmap.CompressFormat format) {
         File myDir = getInstrumentation().getContext().getExternalFilesDir("gradient");
         myDir.mkdirs();
