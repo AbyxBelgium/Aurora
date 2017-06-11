@@ -28,9 +28,10 @@ public class CircleShape implements ShapeType {
     public Bitmap renderParallel(Bitmap input, int backgroundColour, int padding) {
         // We want to end up with a square Bitmap with some padding applied to it, so we use the
         // the length of the largest dimension (width or height) as the width of our square.
-        int dimension = getLargestDimension(input.getWidth(), input.getHeight());
+        int dimension = getLargestDimension(input.getWidth(), input.getHeight()) + 2 * padding;
 
         Bitmap output = createSquareBitmapWithPadding(input, padding);
+        output.setHasAlpha(true);
 
         RenderScript rs = RenderScript.create(this.context);
 
@@ -44,10 +45,10 @@ public class CircleShape implements ShapeType {
         circleRenderer.set_centerX(dimension / 2);
         circleRenderer.set_centerY(dimension / 2);
         circleRenderer.set_radius(dimension / 2);
-        circleRenderer.set_destinationA(Color.alpha(backgroundColour));
-        circleRenderer.set_destinationR(Color.red(backgroundColour));
-        circleRenderer.set_destinationG(Color.green(backgroundColour));
-        circleRenderer.set_destinationB(Color.blue(backgroundColour));
+        circleRenderer.set_destinationA(((float) Color.alpha(backgroundColour)) / 255.0f);
+        circleRenderer.set_destinationR(((float) Color.red(backgroundColour)) / 255.0f);
+        circleRenderer.set_destinationG(((float) Color.green(backgroundColour)) / 255.0f);
+        circleRenderer.set_destinationB(((float) Color.blue(backgroundColour)) / 255.0f);
 
         circleRenderer.forEach_circleRender(inputAlloc, outputAlloc);
         outputAlloc.copyTo(output);
@@ -65,20 +66,17 @@ public class CircleShape implements ShapeType {
     private Bitmap createSquareBitmapWithPadding(Bitmap input, int padding) {
         // We want to end up with a square Bitmap with some padding applied to it, so we use the
         // the length of the largest dimension (width or height) as the width of our square.
-        int dimension = getLargestDimension(input.getWidth(), input.getHeight());
+        int dimension = getLargestDimension(input.getWidth(), input.getHeight()) + 2 * padding;
 
-        int[] outputPixels= new int[(dimension + 2 * padding) * (dimension + 2 * padding)];
+        int[] outputPixels = new int[dimension * dimension];
 
-        // Initialize the array to all transparent.
-        for (int i = 0; i < outputPixels.length; i++) {
-            outputPixels[i] = Color.TRANSPARENT;
-        }
+        // No need to initialize the array because the transparent color is by default 0
 
         int[] inputPixels = new int[input.getWidth() * input.getHeight()];
         input.getPixels(inputPixels, 0, input.getWidth(), 0, 0, input.getWidth(), input.getHeight());
 
-        int differenceWidth = dimension - input.getWidth();
-        int differenceHeight = dimension - input.getHeight();
+        int differenceWidth = dimension - input.getWidth() - padding;
+        int differenceHeight = dimension - input.getHeight() - padding;
 
         // Copy the original image to the new image and center it.
         for (int x = 0; x < input.getWidth(); x++) {

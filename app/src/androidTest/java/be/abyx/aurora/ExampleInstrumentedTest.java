@@ -98,9 +98,13 @@ public class ExampleInstrumentedTest {
 
         Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize, null);
 
-
+        ImageUtils utils = new ImageUtils(appContext);
         Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
-        saveImageToExternalStorage(cropped, Bitmap.CompressFormat.PNG);
+
+        ShapeFactory factory = new ParallelShapeFactory();
+        Bitmap result = factory.createShape(new CircleShape(appContext), cropped, Color.argb(143, 255, 255, 255), 150);
+
+        saveImageToExternalStorage(result, Bitmap.CompressFormat.PNG);
     }
 
     private void saveImageToExternalStorage(Bitmap finalBitmap, Bitmap.CompressFormat format) {

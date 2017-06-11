@@ -11,10 +11,10 @@ int centerY = 0;
 int radius = 0;
 
 // Destination colour of the background can be set here.
-int destinationR;
-int destinationG;
-int destinationB;
-int destinationA;
+float destinationR;
+float destinationG;
+float destinationB;
+float destinationA;
 
 static int square(int input) {
     return input * input;
@@ -27,12 +27,14 @@ uchar4 RS_KERNEL circleRender(uchar4 in, uint32_t x, uint32_t y) {
     // Check if the current coordinates fall inside the circle
     if (square(x - centerX) + square(y - centerY) < square(radius)) {
         // Check if current position is transparent we then need to add the background!)
-        if (f4.a == 0) {
-            f4.r = destinationR;
-            f4.g = destinationG;
-            f4.b = destinationB;
-            f4.a = destinationA;
-        }
+        //if (f4.a == 0) {
+            rsDebug("Red", f4.r);
+            rsDebug("Green", f4.g);
+            rsDebug("Blue", f4.b);
+            rsDebug("Alpha", f4.a);
+
+            return rsPackColorTo8888(destinationR, destinationG, destinationB, destinationA);
+        //}
     }
 
     return rsPackColorTo8888(f4);
