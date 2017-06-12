@@ -60,14 +60,12 @@ public class RectangleShape implements ShapeType {
         int[] outputPixels = new int[(width + 2 * padding) * (height + 2 * padding)];
 
         int[] inputPixels = new int[input.getWidth() * input.getHeight()];
-
-        int differenceWidth = width - input.getWidth() - padding;
-        int differenceHeight = height - input.getHeight() - padding;
+        input.getPixels(inputPixels, 0, input.getWidth(), 0, 0, input.getWidth(), input.getHeight());
 
         // Copy the original image to the new image and center it.
         for (int x = 0; x < input.getWidth(); x++) {
             for (int y = 0; y < input.getHeight(); y++) {
-                outputPixels[(y + differenceHeight) * (width + 2 * padding) + x + differenceWidth] = inputPixels[y * input.getWidth() + x];
+                outputPixels[(y + padding) * (width + 2 * padding) + x + padding] = inputPixels[y * input.getWidth() + x];
             }
         }
 
