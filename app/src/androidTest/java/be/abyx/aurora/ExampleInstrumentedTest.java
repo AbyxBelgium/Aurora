@@ -107,6 +107,23 @@ public class ExampleInstrumentedTest {
         saveImageToExternalStorage(result, Bitmap.CompressFormat.PNG);
     }
 
+    @Test
+    public void testCircleShapeBackground() throws Exception {
+
+    }
+
+    @Test
+    public void testNoiseGradient() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        AuroraFactory factory = new DefaultAuroraFactory(appContext);
+        Bitmap gradient = factory.createAuroraBasedUponColour(Color.parseColor("#4C4F5C"), 1000, 1000);
+
+        ImageUtils utils = new ImageUtils(appContext);
+        Bitmap noise = utils.addNoise(gradient, 0.4f, 10);
+
+        saveImageToExternalStorage(noise, Bitmap.CompressFormat.PNG);
+    }
+
     private void saveImageToExternalStorage(Bitmap finalBitmap, Bitmap.CompressFormat format) {
         File myDir = getInstrumentation().getContext().getExternalFilesDir("gradient");
         myDir.mkdirs();
