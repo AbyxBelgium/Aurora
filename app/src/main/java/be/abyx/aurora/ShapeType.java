@@ -10,4 +10,6 @@ import android.graphics.Bitmap;
 public interface ShapeType {
     public Bitmap render(Bitmap input, int backgroundColour, int padding);
     public Bitmap renderParallel(Bitmap input, int backgroundColour, int padding);
+    public Bitmap renderCustomBackground(Bitmap input, Bitmap backgroundImage, int padding);
+    public Bitmap renderParallelCustomBackground(Bitmap input, Bitmap backgroundImage, int padding);
 }

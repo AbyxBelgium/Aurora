@@ -53,6 +53,16 @@ public class RectangleShape implements ShapeType {
         return output;
     }
 
+    @Override
+    public Bitmap renderCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
+        return null;
+    }
+
+    @Override
+    public Bitmap renderParallelCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
+        return null;
+    }
+
     private Bitmap createCenteredBitmapWithPadding(Bitmap input, int padding) {
         int width = input.getWidth();
         int height = input.getHeight();

@@ -61,6 +61,16 @@ public class CircleShape implements ShapeType {
         return output;
     }
 
+    @Override
+    public Bitmap renderCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
+        return null;
+    }
+
+    @Override
+    public Bitmap renderParallelCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
+        return null;
+    }
+
     // TODO: optimization: This function could also directly take place inside the RenderScript
     // TODO: kernel and thus speed up the execution...
     private Bitmap createSquareBitmapWithPadding(Bitmap input, int padding) {

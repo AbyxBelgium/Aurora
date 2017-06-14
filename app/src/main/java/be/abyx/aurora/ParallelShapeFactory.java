@@ -13,4 +13,9 @@ public class ParallelShapeFactory implements ShapeFactory {
     public Bitmap createShape(ShapeType type, Bitmap input, int backgroundColour, int shapePadding) {
         return type.renderParallel(input, backgroundColour, shapePadding);
     }
+
+    @Override
+    public Bitmap createShape(ShapeType type, Bitmap input, Bitmap background, int shapePadding) {
+        return null;
+    }
 }
