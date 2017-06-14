@@ -68,7 +68,38 @@ public class CircleShape implements ShapeType {
 
     @Override
     public Bitmap renderParallelCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
-        return null;
+        // We want to end up with a square Bitmap with some padding applied to it, so we use the
+        // the length of the largest dimension (width or height) as the width of our square.
+        int dimension = getLargestDimension(input.getWidth(), input.getHeight()) + 2 * padding;
+
+        Bitmap output = createSquareBitmapWithPadding(input, padding);
+        output.setHasAlpha(true);
+
+        RenderScript rs = RenderScript.create(this.context);
+
+        Allocation inputAlloc = Allocation.createFromBitmap(rs, output);
+        Type t = inputAlloc.getType();
+
+        Allocation backgroundAlloc = Allocation.createFromBitmap(rs, backgroundImage);
+
+        Allocation outputAlloc = Allocation.createTyped(rs, t);
+
+        ScriptC_circle_render_bitmap circleRenderer = new ScriptC_circle_render_bitmap(rs);
+        circleRenderer.set_centerX(dimension / 2);
+        circleRenderer.set_centerY(dimension / 2);
+        circleRenderer.set_radius(dimension / 2);
+
+        circleRenderer.forEach_circleRender(inputAlloc, backgroundAlloc, outputAlloc);
+
+        outputAlloc.copyTo(output);
+
+        inputAlloc.destroy();
+        outputAlloc.destroy();
+        backgroundAlloc.destroy();
+        circleRenderer.destroy();
+        rs.destroy();
+
+        return output;
     }
 
     // TODO: optimization: This function could also directly take place inside the RenderScript
