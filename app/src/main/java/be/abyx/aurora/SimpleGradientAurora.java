@@ -29,7 +29,7 @@ public class SimpleGradientAurora implements AuroraType {
         }
 
         // We use RGB_565 because alpha-values should be ignored.
-        return Bitmap.createBitmap(pixels, width, height, Bitmap.Config.RGB_565);
+        return Bitmap.createBitmap(pixels, width, height, Bitmap.Config.ARGB_8888);
     }
 
     @Override

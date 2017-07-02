@@ -80,7 +80,9 @@ public class CircleShape implements ShapeType {
         Allocation inputAlloc = Allocation.createFromBitmap(rs, output);
         Type t = inputAlloc.getType();
 
-        Allocation backgroundAlloc = Allocation.createFromBitmap(rs, backgroundImage);
+        Bitmap resizedBackground = Bitmap.createBitmap(backgroundImage, 0, 0, dimension, dimension);
+
+        Allocation backgroundAlloc = Allocation.createFromBitmap(rs, resizedBackground);
 
         Allocation outputAlloc = Allocation.createTyped(rs, t);
 
@@ -102,6 +104,15 @@ public class CircleShape implements ShapeType {
         return output;
     }
 
+    /**
+     * Create a Bitmap with both the width and height equal to the largest dimension (either
+     * original width or original height) and center the original content inside of the new Bitmap.
+     *
+     * @param input The Bitmap that should be made square and centered.
+     * @param padding An extra border that should be added around the original image (width in
+     *                pixels).
+     * @return A new Bitmap that's square and contains the original image in the center.
+     */
     // TODO: optimization: This function could also directly take place inside the RenderScript
     // TODO: kernel and thus speed up the execution...
     private Bitmap createSquareBitmapWithPadding(Bitmap input, int padding) {

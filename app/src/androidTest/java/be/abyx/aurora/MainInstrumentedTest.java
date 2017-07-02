@@ -27,7 +27,7 @@ import static junit.framework.Assert.assertEquals;
  * @author Pieter Verschaffelt
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class MainInstrumentedTest {
     @Test
     public void testMostOccurringColour() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
@@ -109,7 +109,23 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testCircleShapeBackground() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
 
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize, null);
+
+        ImageUtils utils = new ImageUtils(appContext);
+        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+
+        AuroraFactory factory = new DefaultAuroraFactory(appContext);
+        // Make our Bitmap large enough!
+        Bitmap gradient = factory.createAuroraBasedUponColour(Color.parseColor("#4C4F5C"), 1000, 1000);
+
+        Bitmap noise = utils.addNoise(gradient, 0.4f, 10);
+
+        ShapeFactory shapeFactory = new ParallelShapeFactory();
+        Bitmap result = shapeFactory.createShape(new CircleShape(appContext), cropped, noise, 150);
+
+        saveImageToExternalStorage(result, Bitmap.CompressFormat.PNG);
     }
 
     @Test

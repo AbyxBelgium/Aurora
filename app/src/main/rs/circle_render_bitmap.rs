@@ -15,15 +15,16 @@ static int square(int input) {
 
 uchar4 RS_KERNEL circleRender(uchar4 in, uchar4 background, uint32_t x, uint32_t y) {
     //Convert input uchar4 to float4
-    float4 f4 = rsUnpackColor8888(in);
+    //float4 f4 = rsUnpackColor8888(in);
 
     // Check if the current coordinates fall inside the circle
-    if (square(x - centerX) + square(y - centerY) < square(radius)) {
-        // Check if current position is transparent we then need to add the background!)
-        if (f4.a == 0) {
-            return background;
-        }
-    }
+    //if (square(x - centerX) + square(y - centerY) < square(radius)) {
+        // Check if current position is transparent (we then need to add the background!)
+        //if (f4.a == 0) {
+            //return background;
+        //}
+    //}
 
-    return rsPackColorTo8888(f4);
+    //return rsPackColorTo8888(f4);
+    return 0;
 }
