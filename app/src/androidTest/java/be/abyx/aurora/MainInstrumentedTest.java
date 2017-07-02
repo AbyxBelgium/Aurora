@@ -108,6 +108,21 @@ public class MainInstrumentedTest {
     }
 
     @Test
+    public void testCircleShapeRectangleInput() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.spar, null);
+
+        ImageUtils utils = new ImageUtils(appContext);
+        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+
+        ShapeFactory factory = new ParallelShapeFactory();
+        Bitmap result = factory.createShape(new CircleShape(appContext), cropped, Color.argb(143, 255, 255, 255), 150);
+
+        saveImageToExternalStorage(result, Bitmap.CompressFormat.PNG);
+    }
+
+    @Test
     public void testCircleShapeBackground() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 

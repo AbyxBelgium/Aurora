@@ -127,8 +127,8 @@ public class CircleShape implements ShapeType {
         int[] inputPixels = new int[input.getWidth() * input.getHeight()];
         input.getPixels(inputPixels, 0, input.getWidth(), 0, 0, input.getWidth(), input.getHeight());
 
-        int differenceWidth = dimension - input.getWidth() - padding;
-        int differenceHeight = dimension - input.getHeight() - padding;
+        int differenceWidth = (dimension - input.getWidth() - padding) / 2;
+        int differenceHeight = (dimension - input.getHeight() - padding) / 2;
 
         // Copy the original image to the new image and center it.
         for (int x = 0; x < input.getWidth(); x++) {
