@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "hexString": "#F34336",
+      "name": "Red"
+    },
+    {
+      "hexString": "#E81E63",
+      "name": "Pink"
+    },
+    {
+      "hexString": "#9C27B0",
+      "name": "Purple"
+    },
+    {
+      "hexString": "#673AB7",
+      "name": "Deep Purple"
+    },
+    {
+      "hexString": "#3F51B5",
+      "name": "Indigo"
+    },
+    {
+      "hexString": "#2196F2",
+      "name": "Blue"
+    },
+    {
+      "hexString": "#03A9F3",
+      "name": "Light Blue"
+    },
+    {
+      "hexString": "#00BCD3",
+      "name": "Cyan"
+    },
+    {
+      "hexString": "#009688",
+      "name": "Teal"
+    },
+    {
+      "hexString": "#4CAF50",
+      "name": "Green"
+    },
+    {
+      "hexString": "#8BC24A",
+      "name": "Light Green"
+    },
+    {
+      "hexString": "#CCDB39",
+      "name": "Lime"
+    },
+    {
+      "hexString": "#FEEA3B",
+      "name": "Yellow"
+    },
+    {
+      "hexString": "#FEC007",
+      "name": "Amber"
+    },
+    {
+      "hexString": "#FE9800",
+      "name": "Orange"
+    },
+    {
+      "hexString": "#FE5722",
+      "name": "Deep Orange"
+    },
+    {
+      "hexString": "#FEC007",
+      "name": "Amber"
+    },
+    {
+      "hexString": "#795548",
+      "name": "Brown"
+    },
+    {
+      "hexString": "#9E9E9E",
+      "name": "Grey"
+    },
+    {
+      "hexString": "#607D8A",
+      "name": "Blue Grey"
+    }
+  ]
+}

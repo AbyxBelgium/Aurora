@@ -36,13 +36,8 @@ public class ColourParser {
 
         for (int i = 0; i < parsedColours.length(); i++) {
             JSONObject obj = parsedColours.getJSONObject(i);
-            JSONObject rgbObj = obj.getJSONObject("rgb");
-
-            int red = rgbObj.getInt("r");
-            int green = rgbObj.getInt("g");
-            int blue = rgbObj.getInt("b");
-
-            output.add(Color.argb(255, red, green, blue));
+            String hex = obj.getString("hexString");
+            output.add(Color.parseColor(hex));
         }
 
         return output;
