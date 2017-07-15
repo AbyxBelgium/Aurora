@@ -86,9 +86,9 @@ public class MainInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize);
-        ImageUtils utils = new ImageUtils(appContext);
+        CropUtility cropUtility = new CropUtility();
 
-        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+        Bitmap cropped = cropUtility.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
         saveImageToExternalStorage(cropped, Bitmap.CompressFormat.PNG);
     }
 
@@ -98,8 +98,8 @@ public class MainInstrumentedTest {
 
         Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize);
 
-        ImageUtils utils = new ImageUtils(appContext);
-        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+        CropUtility cropUtility = new CropUtility();
+        Bitmap cropped = cropUtility.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
 
         ShapeFactory factory = new ParallelShapeFactory();
         Bitmap result = factory.createShape(new CircleShape(appContext), cropped, Color.argb(143, 255, 255, 255), 150);
@@ -113,8 +113,8 @@ public class MainInstrumentedTest {
 
         Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.spar);
 
-        ImageUtils utils = new ImageUtils(appContext);
-        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+        CropUtility cropUtility = new CropUtility();
+        Bitmap cropped = cropUtility.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
 
         ShapeFactory factory = new ParallelShapeFactory();
         Bitmap result = factory.createShape(new CircleShape(appContext), cropped, Color.argb(143, 255, 255, 255), 150);
@@ -128,13 +128,14 @@ public class MainInstrumentedTest {
 
         Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize);
 
-        ImageUtils utils = new ImageUtils(appContext);
-        Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+        CropUtility cropUtility = new CropUtility();
+        Bitmap cropped = cropUtility.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
 
         AuroraFactory factory = new DefaultAuroraFactory(appContext);
         // Make our Bitmap large enough!
         Bitmap gradient = factory.createAuroraBasedUponColour(Color.parseColor("#4C4F5C"), 1000, 1000);
 
+        ImageUtils utils = new ImageUtils(appContext);
         Bitmap noise = utils.addNoise(gradient, 0.4f, 10);
 
         ShapeFactory shapeFactory = new ParallelShapeFactory();
@@ -148,9 +149,9 @@ public class MainInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.spar2);
-        ImageUtils utils = new ImageUtils(appContext);
+        CropUtility cropUtility = new CropUtility();
 
-        Bitmap cropped = utils.autoCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+        Bitmap cropped = cropUtility.rectangularCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
         saveImageToExternalStorage(cropped, Bitmap.CompressFormat.PNG);
     }
 
