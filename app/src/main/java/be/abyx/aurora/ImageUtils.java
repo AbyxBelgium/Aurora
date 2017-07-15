@@ -121,4 +121,100 @@ public class ImageUtils {
     protected boolean validPosition(int x, int y, int width, int height) {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
+
+    /**
+     * Automatically remove white rectangler border from around an image. This is different from
+     * magicCrop as changes the canvas size of the image and does not make pixels transparent.
+     *
+     * @param input
+     * @param colour
+     * @param tolerance
+     * @return
+     */
+    public Bitmap autoCrop(Bitmap input, int colour, float tolerance) {
+        int width = input.getWidth();
+        int height = input.getHeight();
+
+        int[] pixels = new int[width * height];
+        input.getPixels(pixels, 0, width, 0, 0, width, height);
+
+        int rowStart = 0;
+        int colStart = 0;
+
+        int rowEnd = 0;
+        int colEnd = 0;
+
+        float treshold = 3 * 255 * tolerance;
+
+        int referenceRed = Color.red(colour);
+        int referenceGreen = Color.green(colour);
+        int referenceBlue = Color.blue(colour);
+        int sum = referenceBlue + referenceGreen + referenceRed;
+
+        // First we have to determine the four edges of the output Bitmap.
+        for (int row = 0; row < input.getHeight(); row++) {
+            for (int col = 0; col < input.getWidth(); col++) {
+                int pixel = pixels[row * width + col];
+                int red = Color.red(pixel);
+                int blue = Color.blue(pixel);
+                int green = Color.green(pixel);
+
+                float difference = Math.abs((red + blue + green) - sum);
+
+                if (difference > treshold) {
+                    rowStart = Math.max(row, 0);
+                }
+            }
+        }
+
+        for (int col = 0; col < input.getWidth(); col++) {
+            for (int row = 0; row < input.getHeight(); row++) {
+                int pixel = pixels[row * width + col];
+                int red = Color.red(pixel);
+                int blue = Color.blue(pixel);
+                int green = Color.green(pixel);
+
+                float difference = Math.abs((red + blue + green) - sum);
+
+                if (difference > treshold) {
+                    colStart = Math.max(col, 0);
+                }
+            }
+        }
+
+        for (int row = input.getHeight() - 1; row >= 0; row--) {
+            for (int col = 0; col < input.getWidth(); col++) {
+                int pixel = pixels[row * width + col];
+                int red = Color.red(pixel);
+                int blue = Color.blue(pixel);
+                int green = Color.green(pixel);
+
+                float difference = Math.abs((red + blue + green) - sum);
+
+                if (difference > treshold) {
+                    rowEnd = Math.min(row, input.getHeight());
+                }
+            }
+        }
+
+        for (int col = input.getWidth() - 1; col >= 0; col--) {
+            for (int row = 0; row < input.getHeight(); row++) {
+                int pixel = pixels[row * width + col];
+                int red = Color.red(pixel);
+                int blue = Color.blue(pixel);
+                int green = Color.green(pixel);
+
+                float difference = Math.abs((red + blue + green) - sum);
+
+                if (difference > treshold) {
+                    colEnd = Math.min(col, input.getWidth());
+                }
+            }
+        }
+
+
+
+        // Now we copy the resulting part from the first Bitmap to the second Bitmap.
+        return Bitmap.createBitmap(input, colEnd, rowEnd, colStart - colEnd, rowStart - rowEnd);
+    }
 }

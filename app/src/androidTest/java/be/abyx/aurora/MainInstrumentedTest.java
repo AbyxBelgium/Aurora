@@ -32,7 +32,7 @@ public class MainInstrumentedTest {
     public void testMostOccurringColour() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red, null);
+        Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red);
         AuroraFactory factory = new DefaultAuroraFactory(appContext);
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
@@ -42,7 +42,7 @@ public class MainInstrumentedTest {
 
         assertEquals("Colour should be equal to red", Color.argb(255, 255, 0, 0), output);
 
-        Drawable greenDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.mostly_green, null);
+        Drawable greenDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.mostly_green);
 
         Bitmap greenImage = ((BitmapDrawable) greenDrawable).getBitmap();
 
@@ -54,7 +54,7 @@ public class MainInstrumentedTest {
     public void testSimpleGradientAurora() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red, null);
+        Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red);
         AuroraFactory factory = new DefaultAuroraFactory(appContext);
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
@@ -71,7 +71,7 @@ public class MainInstrumentedTest {
     public void testBlurryAurora() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red, null);
+        Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red);
         AuroraFactory factory = new ParallelAuroraFactory(appContext);
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
@@ -85,7 +85,7 @@ public class MainInstrumentedTest {
     public void testMagicCrop() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize, null);
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize);
         ImageUtils utils = new ImageUtils(appContext);
 
         Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
@@ -96,7 +96,7 @@ public class MainInstrumentedTest {
     public void testCircleShape() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize, null);
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize);
 
         ImageUtils utils = new ImageUtils(appContext);
         Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
@@ -111,7 +111,7 @@ public class MainInstrumentedTest {
     public void testCircleShapeRectangleInput() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.spar, null);
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.spar);
 
         ImageUtils utils = new ImageUtils(appContext);
         Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
@@ -126,7 +126,7 @@ public class MainInstrumentedTest {
     public void testCircleShapeBackground() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize, null);
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize);
 
         ImageUtils utils = new ImageUtils(appContext);
         Bitmap cropped = utils.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
@@ -141,6 +141,17 @@ public class MainInstrumentedTest {
         Bitmap result = shapeFactory.createShape(new CircleShape(appContext), cropped, noise, 150);
 
         saveImageToExternalStorage(result, Bitmap.CompressFormat.PNG);
+    }
+
+    @Test
+    public void testRectangularCrop() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.spar2);
+        ImageUtils utils = new ImageUtils(appContext);
+
+        Bitmap cropped = utils.autoCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
+        saveImageToExternalStorage(cropped, Bitmap.CompressFormat.PNG);
     }
 
     @Test
