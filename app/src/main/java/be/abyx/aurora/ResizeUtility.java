@@ -8,8 +8,8 @@ import android.graphics.Bitmap;
  * @author Pieter Verschaffelt
  */
 public class ResizeUtility {
-    public Bitmap resizeAndSquare(Bitmap input, int dimension) {
-        Bitmap squared = createSquareBitmapWithPadding(input, 0);
+    public Bitmap resizeAndSquare(Bitmap input, int dimension, int padding) {
+        Bitmap squared = createSquareBitmapWithPadding(input, padding);
         return Bitmap.createScaledBitmap(squared, dimension, dimension, false);
     }
 

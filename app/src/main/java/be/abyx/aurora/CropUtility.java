@@ -33,10 +33,10 @@ public class CropUtility {
         // the edges that should get removed.
         Stack<ImageCoordinate> coordinates = new Stack<>();
         // Start filling from the four corners of the image
-        coordinates.push(new ImageCoordinate(0, height - 1));
-        coordinates.push(new ImageCoordinate(width - 1, height - 1));
-        coordinates.push(new ImageCoordinate(width - 1, 0));
-        coordinates.push(new ImageCoordinate(0, 0));
+        coordinates.push(new ImageCoordinate(1, height - 2));
+        coordinates.push(new ImageCoordinate(width - 2, height - 2));
+        coordinates.push(new ImageCoordinate(width - 2, 1));
+        coordinates.push(new ImageCoordinate(1, 1));
 
         int referenceRed = Color.red(colour);
         int referenceGreen = Color.green(colour);

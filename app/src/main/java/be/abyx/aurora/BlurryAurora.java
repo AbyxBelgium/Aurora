@@ -89,8 +89,14 @@ public class BlurryAurora implements AuroraType {
         ScriptC_hue_shift hueShift = new ScriptC_hue_shift(rs);
 
         float shift = getHueShift(sourcePixel[0], colour);
+        float satShift = getSaturationShift(sourcePixel[0], colour);
 
         hueShift.set_shift(shift);
+        if (satShift >= 180) {
+            hueShift.set_saturation(0);
+        } else {
+            hueShift.set_saturation(1);
+        }
 
         hueShift.forEach_hueShift(input, output);
         // Reuse the sourceBitmap to save resources (we no longer need it)
@@ -121,6 +127,15 @@ public class BlurryAurora implements AuroraType {
         convertColorToHSV(destinationColour, destinationHSV);
 
         return (destinationHSV[0] - referenceHSV[0] + 360) % 360;
+    }
+
+    private float getSaturationShift(int referencePixel, int destinationColour) {
+        float[] referenceHSV = new float[3];
+        convertColorToHSV(referencePixel, referenceHSV);
+        float[] destinationHSV = new float[3];
+        convertColorToHSV(destinationColour, destinationHSV);
+
+        return (destinationHSV[1] - referenceHSV[1] + 360) % 360;
     }
 
     private void convertColorToHSV(int colour, float[] result) {

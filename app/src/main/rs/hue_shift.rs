@@ -5,6 +5,7 @@
 
 // The value by which the hue must be shifted
 float shift = 0.0;
+float saturation = 0.0;
 
 // Convert a pixel in RGB color space to the HSV color space
 static float3 convertRgbToHsv(float red, float green, float blue) {
@@ -89,6 +90,9 @@ uchar4 RS_KERNEL hueShift(uchar4 in, uint32_t x, uint32_t y) {
     float3 hsv = convertRgbToHsv(f4.r, f4.g, f4.b);
 
     hsv[0] = fmod(hsv[0] + shift, 360);
+    if (saturation = 0) {
+        hsv[1] = saturation;
+    }
 
     float4 rgb = convertHsvToRgb(hsv[0], hsv[1], hsv[2]);
 

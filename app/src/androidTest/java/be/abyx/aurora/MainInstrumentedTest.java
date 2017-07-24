@@ -82,6 +82,17 @@ public class MainInstrumentedTest {
     }
 
     @Test
+    public void testBlurryAuroraNoSaturation() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        AuroraFactory factory = new ParallelAuroraFactory(appContext);
+
+        Bitmap gradient = factory.createAuroraBasedUponColour(Color.RED, new BlurryAurora(appContext), 1200, 1920);
+
+        saveImageToExternalStorage(gradient, Bitmap.CompressFormat.JPEG);
+    }
+
+    @Test
     public void testMagicCrop() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
