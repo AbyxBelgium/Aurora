@@ -87,7 +87,7 @@ public class MainInstrumentedTest {
 
         AuroraFactory factory = new ParallelAuroraFactory(appContext);
 
-        Bitmap gradient = factory.createAuroraBasedUponColour(Color.RED, new BlurryAurora(appContext), 1200, 1920);
+        Bitmap gradient = factory.createAuroraBasedUponColour(Color.BLACK, new BlurryAurora(appContext), 1200, 1920);
 
         saveImageToExternalStorage(gradient, Bitmap.CompressFormat.JPEG);
     }

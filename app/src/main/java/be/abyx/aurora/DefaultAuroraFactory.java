@@ -47,8 +47,8 @@ public class DefaultAuroraFactory implements AuroraFactory {
         Palette p = Palette.from(input).addFilter(new Palette.Filter() {
             @Override
             public boolean isAllowed(int rgb, float[] hsl) {
-                // We don't want black or white as the dominant colour.
-                return rgb != Color.WHITE && rgb != Color.BLACK;
+                // We don't want white as the dominant colour.
+                return rgb != Color.WHITE;
             }
         }).generate();
 

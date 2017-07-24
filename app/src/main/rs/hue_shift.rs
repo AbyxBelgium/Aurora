@@ -90,8 +90,8 @@ uchar4 RS_KERNEL hueShift(uchar4 in, uint32_t x, uint32_t y) {
     float3 hsv = convertRgbToHsv(f4.r, f4.g, f4.b);
 
     hsv[0] = fmod(hsv[0] + shift, 360);
-    if (saturation = 0) {
-        hsv[1] = saturation;
+    if (saturation <= 0.5) {
+        hsv[1] = 0;
     }
 
     float4 rgb = convertHsvToRgb(hsv[0], hsv[1], hsv[2]);
