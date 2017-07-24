@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.shapes;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,6 +6,9 @@ import android.graphics.Color;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.Type;
+
+import be.abyx.aurora.ScriptC_rectangle_render;
+import be.abyx.aurora.shapes.ShapeType;
 
 /**
  * @author Pieter Verschaffelt

@@ -1,8 +1,10 @@
-package be.abyx.aurora;
+package be.abyx.aurora.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.SparseIntArray;
+
+import be.abyx.aurora.aurora.AuroraType;
+import be.abyx.aurora.aurora.DefaultAuroraFactory;
 
 /**
  * An AuroraFactory that prefers to execute massively parallel implementations of render-functions.

@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.utilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,14 +10,14 @@ import java.util.Stack;
 
 
 /**
- * This class provides several methods for advanced image manipulation.
+ * This class provides methods for adding noise to a Bitmap.
  *
  * @author Pieter Verschaffelt
  */
-public class ImageUtils {
+public class NoiseUtility {
     private Context context;
 
-    public ImageUtils(Context context) {
+    public NoiseUtility(Context context) {
         this.context = context;
     }
 

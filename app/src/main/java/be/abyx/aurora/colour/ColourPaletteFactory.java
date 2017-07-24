@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.colour;
 
 import android.content.Context;
 
@@ -6,6 +6,8 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.List;
+
+import be.abyx.aurora.R;
 
 /**
  * @author Pieter Verschaffelt

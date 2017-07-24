@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.utilities;
 
 import android.graphics.Bitmap;
 

@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.colour;
 
 import android.graphics.Color;
 

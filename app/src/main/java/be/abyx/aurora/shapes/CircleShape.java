@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.shapes;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,6 +6,11 @@ import android.graphics.Color;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.Type;
+
+import be.abyx.aurora.ScriptC_circle_render;
+import be.abyx.aurora.ScriptC_circle_render_bitmap;
+import be.abyx.aurora.shapes.ShapeType;
+import be.abyx.aurora.utilities.ResizeUtility;
 
 /**
  * A type of Shape that can be used for rendering circles with a specific background colour.

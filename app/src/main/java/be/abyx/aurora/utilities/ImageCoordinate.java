@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.utilities;
 
 /**
  * This class represents an (x, y)-position in an image.

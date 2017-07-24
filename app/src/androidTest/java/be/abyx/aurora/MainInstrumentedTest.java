@@ -5,9 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.core.deps.guava.util.concurrent.ExecutionError;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
@@ -17,6 +15,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.Random;
+
+import be.abyx.aurora.aurora.AuroraFactory;
+import be.abyx.aurora.aurora.BlurryAurora;
+import be.abyx.aurora.aurora.DefaultAuroraFactory;
+import be.abyx.aurora.aurora.ParallelAuroraFactory;
+import be.abyx.aurora.shapes.CircleShape;
+import be.abyx.aurora.shapes.ParallelShapeFactory;
+import be.abyx.aurora.shapes.ShapeFactory;
+import be.abyx.aurora.utilities.CropUtility;
+import be.abyx.aurora.utilities.NoiseUtility;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static junit.framework.Assert.assertEquals;
@@ -146,7 +154,7 @@ public class MainInstrumentedTest {
         // Make our Bitmap large enough!
         Bitmap gradient = factory.createAuroraBasedUponColour(Color.parseColor("#4C4F5C"), 1000, 1000);
 
-        ImageUtils utils = new ImageUtils(appContext);
+        NoiseUtility utils = new NoiseUtility(appContext);
         Bitmap noise = utils.addNoise(gradient, 0.4f, 10);
 
         ShapeFactory shapeFactory = new ParallelShapeFactory();
@@ -172,7 +180,7 @@ public class MainInstrumentedTest {
         AuroraFactory factory = new DefaultAuroraFactory(appContext);
         Bitmap gradient = factory.createAuroraBasedUponColour(Color.parseColor("#4C4F5C"), 1000, 1000);
 
-        ImageUtils utils = new ImageUtils(appContext);
+        NoiseUtility utils = new NoiseUtility(appContext);
         Bitmap noise = utils.addNoise(gradient, 0.4f, 10);
 
         saveImageToExternalStorage(noise, Bitmap.CompressFormat.PNG);

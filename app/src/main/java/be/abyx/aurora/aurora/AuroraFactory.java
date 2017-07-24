@@ -1,8 +1,6 @@
-package be.abyx.aurora;
+package be.abyx.aurora.aurora;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 
 /**
  * This interface defines methods that should be provided by all AuroraFactories. These methods can

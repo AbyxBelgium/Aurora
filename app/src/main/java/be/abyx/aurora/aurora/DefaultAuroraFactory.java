@@ -1,11 +1,9 @@
-package be.abyx.aurora;
+package be.abyx.aurora.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Debug;
 import android.support.v7.graphics.Palette;
-import android.util.SparseIntArray;
 
 /**
  * This factory is a concrete AuroraFactory implementation that uses a simple CPU-based algorithm

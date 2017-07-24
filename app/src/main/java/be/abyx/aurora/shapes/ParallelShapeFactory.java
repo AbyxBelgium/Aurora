@@ -1,6 +1,9 @@
-package be.abyx.aurora;
+package be.abyx.aurora.shapes;
 
 import android.graphics.Bitmap;
+
+import be.abyx.aurora.shapes.ShapeFactory;
+import be.abyx.aurora.shapes.ShapeType;
 
 /**
  * Fast implementation of the ShapeFactory that prefers the execution of massively parallel

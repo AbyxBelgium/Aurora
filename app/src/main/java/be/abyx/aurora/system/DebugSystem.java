@@ -1,4 +1,6 @@
-package be.abyx.aurora;
+package be.abyx.aurora.system;
+
+import be.abyx.aurora.BuildConfig;
 
 /**
  * Derivative of the System-class that contains some methods that are only executed when the app

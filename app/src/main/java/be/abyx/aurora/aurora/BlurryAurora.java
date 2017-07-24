@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.aurora;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,6 +7,10 @@ import android.graphics.Color;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.Type;
+
+import be.abyx.aurora.system.DebugSystem;
+import be.abyx.aurora.R;
+import be.abyx.aurora.ScriptC_hue_shift;
 
 /**
  * An Aurora based upon a blurry image whose hue is shifted to match the hue of a given color.

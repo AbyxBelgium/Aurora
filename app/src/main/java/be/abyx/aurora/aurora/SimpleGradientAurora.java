@@ -1,7 +1,9 @@
-package be.abyx.aurora;
+package be.abyx.aurora.aurora;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+
+import be.abyx.aurora.aurora.AuroraType;
 
 /**
  * A default AuroraRenderer that runs completely off the CPU.
