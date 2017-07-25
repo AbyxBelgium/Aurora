@@ -17,6 +17,12 @@ public class ColourPalette {
         this.colours = colours;
     }
 
+    /**
+     * Determine which colour of this palette corresponds the most to the given input colour.
+     *
+     * @param input Colour for which the closest from this palette must be found.
+     * @return The colour of this palette that resembles the given colour the most.
+     */
     public Integer matchToClosestColour(Integer input) {
         Integer closest = null;
         double smallestDistance = Double.POSITIVE_INFINITY;

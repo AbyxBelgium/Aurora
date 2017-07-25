@@ -36,7 +36,7 @@ public class SimpleGradientAurora implements AuroraType {
 
     @Override
     public Bitmap renderParallel(int width, int height, int colour) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented... Please use single threaded version.");
     }
 
     private int getInterpolatedColour(int value, int row, int totalRows) {

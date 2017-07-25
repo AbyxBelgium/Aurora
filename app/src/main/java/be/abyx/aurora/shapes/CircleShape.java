@@ -26,7 +26,7 @@ public class CircleShape implements ShapeType {
 
     @Override
     public Bitmap render(Bitmap input, int backgroundColour, int padding) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented... Use multithreaded version.");
     }
 
     @Override
@@ -70,7 +70,7 @@ public class CircleShape implements ShapeType {
 
     @Override
     public Bitmap renderCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented... Use multithreaded version.");
     }
 
     @Override

@@ -6,7 +6,7 @@ import android.graphics.Color;
 import java.util.Stack;
 
 /**
- * Provides several different means for cropping a Bitmap.
+ * Provides several different means for cropping a Bitmap in different ways.
  *
  * @author Pieter Verschaffelt
  */

@@ -8,9 +8,9 @@ import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.Type;
 
-import be.abyx.aurora.system.DebugSystem;
 import be.abyx.aurora.R;
 import be.abyx.aurora.ScriptC_hue_shift;
+import be.abyx.aurora.system.DebugSystem;
 
 /**
  * An Aurora based upon a blurry image whose hue is shifted to match the hue of a given color.
@@ -44,6 +44,7 @@ public class BlurryAurora implements AuroraType {
         int referencePixel = pixels[0];
 
         float hueShift = getHueShift(pixels[0], colour);
+        float satShift = getSaturationShift(pixels[0], colour);
 
         int[] outputPixels = new int[height * width];
 
@@ -56,6 +57,11 @@ public class BlurryAurora implements AuroraType {
                 int pixel = pixels[i * originalWidth + j];
                 convertColorToHSV(pixel, hsv);
                 hsv[0] = (hsv[0] + hueShift) % 360;
+
+                if (satShift >= 180) {
+                    hsv[1] = 0;
+                }
+
                 outputPixels[i * width + j] = Color.HSVToColor(hsv);
             }
 

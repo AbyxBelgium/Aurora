@@ -11,6 +11,9 @@ import be.abyx.aurora.ScriptC_rectangle_render;
 import be.abyx.aurora.shapes.ShapeType;
 
 /**
+ * This class represents a rectangular that can be used for drawing a rectangle around a Bitmap with
+ * a certain padding or other parametric options.
+ *
  * @author Pieter Verschaffelt
  */
 public class RectangleShape implements ShapeType {
@@ -22,7 +25,7 @@ public class RectangleShape implements ShapeType {
 
     @Override
     public Bitmap render(Bitmap input, int backgroundColour, int padding) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented... Use multithreaded version.");
     }
 
     @Override
@@ -58,12 +61,12 @@ public class RectangleShape implements ShapeType {
 
     @Override
     public Bitmap renderCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented... No alternative version available.");
     }
 
     @Override
     public Bitmap renderParallelCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented... No alternative version available.");
     }
 
     private Bitmap createCenteredBitmapWithPadding(Bitmap input, int padding) {

@@ -23,10 +23,21 @@ public class DebugSystem {
         }
     }
 
+    /**
+     * Start the System's timer. A call to <pre>endTimer()</pre> must always have a corresponding
+     * call to <pre>startTimer()</pre> before it.
+     */
     public static void startTimer() {
         time = System.currentTimeMillis();
     }
 
+    /**
+     * End the System's timer and output the measured execution time to the console. Time will only
+     * be outputted when the build configuration is set to debug.
+     *
+     * @param message An extra message that will be printed when outputting the execution time. This
+     *                message is useful for identifying multiple time outputs in one console.
+     */
     public static void endTimer(String message) {
         long duration = System.currentTimeMillis() - time;
         if (BuildConfig.DEBUG) {
