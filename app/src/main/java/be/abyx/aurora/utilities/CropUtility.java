@@ -101,12 +101,13 @@ public class CropUtility {
         int rowEnd = 0;
         int colEnd = 0;
 
-        float treshold = 3 * 255 * tolerance;
+        float treshold = 4 * 255 * tolerance;
 
         int referenceRed = Color.red(colour);
         int referenceGreen = Color.green(colour);
         int referenceBlue = Color.blue(colour);
-        int sum = referenceBlue + referenceGreen + referenceRed;
+        int referenceAlpha = Color.alpha(colour);
+        int sum = referenceBlue + referenceGreen + referenceRed + referenceAlpha;
 
         // First we have to determine the four edges of the output Bitmap.
         for (int row = 0; row < input.getHeight(); row++) {
@@ -115,8 +116,9 @@ public class CropUtility {
                 int red = Color.red(pixel);
                 int blue = Color.blue(pixel);
                 int green = Color.green(pixel);
+                int alpha = Color.alpha(pixel);
 
-                float difference = Math.abs((red + blue + green) - sum);
+                float difference = Math.abs((red + blue + green + alpha) - sum);
 
                 if (difference > treshold) {
                     rowStart = Math.max(row, 0);
@@ -130,8 +132,9 @@ public class CropUtility {
                 int red = Color.red(pixel);
                 int blue = Color.blue(pixel);
                 int green = Color.green(pixel);
+                int alpha = Color.alpha(pixel);
 
-                float difference = Math.abs((red + blue + green) - sum);
+                float difference = Math.abs((red + blue + green + alpha) - sum);
 
                 if (difference > treshold) {
                     colStart = Math.max(col, 0);
@@ -145,8 +148,9 @@ public class CropUtility {
                 int red = Color.red(pixel);
                 int blue = Color.blue(pixel);
                 int green = Color.green(pixel);
+                int alpha = Color.alpha(pixel);
 
-                float difference = Math.abs((red + blue + green) - sum);
+                float difference = Math.abs((red + blue + green + alpha) - sum);
 
                 if (difference > treshold) {
                     rowEnd = Math.min(row, input.getHeight());
@@ -160,8 +164,9 @@ public class CropUtility {
                 int red = Color.red(pixel);
                 int blue = Color.blue(pixel);
                 int green = Color.green(pixel);
+                int alpha = Color.alpha(pixel);
 
-                float difference = Math.abs((red + blue + green) - sum);
+                float difference = Math.abs((red + blue + green + alpha) - sum);
 
                 if (difference > treshold) {
                     colEnd = Math.min(col, input.getWidth());

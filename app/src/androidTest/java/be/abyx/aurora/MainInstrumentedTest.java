@@ -186,6 +186,18 @@ public class MainInstrumentedTest {
         saveImageToExternalStorage(noise, Bitmap.CompressFormat.PNG);
     }
 
+    @Test
+    public void testBlackTransparentCrop() throws Exception {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Drawable qr = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.qr);
+
+        CropUtility cropUtility = new CropUtility();
+        Bitmap output = cropUtility.rectangularCrop(((BitmapDrawable) qr).getBitmap(), Color.TRANSPARENT, 0);
+
+        saveImageToExternalStorage(output, Bitmap.CompressFormat.PNG);
+    }
+
     private void saveImageToExternalStorage(Bitmap finalBitmap, Bitmap.CompressFormat format) {
         File myDir = getInstrumentation().getContext().getExternalFilesDir("gradient");
         myDir.mkdirs();
