@@ -3,6 +3,13 @@ The Aurora library allows for manipulating bitmaps and images in a programmatica
 
 **DISCLAIMER: Please note that Aurora is currently still in alpha-status and that some bugs might still be present. All features described in this document are working and tested, but it's possible for some bugs to have been overlooked. Please report any issues in the issue tracker.**
 
+## Installation:
+Aurora is available from jCenter. Just add the following line to your build.gradle:
+
+```
+compile 'be.abyx:aurora:0.10'
+```
+
 ## Features
 ###  Find closest color in a set
 Aurora can, given a specific color, determine the color that's visually the most similar and is part of some predefined set of colors (such as the set of material design colors). This allows you to create backgrounds that fit perfectly.
