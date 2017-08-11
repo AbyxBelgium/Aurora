@@ -23,7 +23,7 @@ Draw a shape (with a specific padding) around a bitmap. Aurora supports both cir
 ### Find closest color in a set
 Given a specific color, packed as an Android color, find the color that resembles it the most (visually) from a specific set of colors. Aurora comes with a set of the most occurring colors and a set containing a selection of Google's material design colors.
 
-The ColourPaletteFactory class is used for constructing a color palette. This is an object that contains all colors from which the visually most appealing will be chosen. Right now only a default color set and a material design color set is supported, but you can always add your own by using the ColourParser. (COMING SOON: Reference to Wiki with ColourParser JSON-format).
+The ColourPaletteFactory class is used for constructing a color palette. This is an object that contains all colors from which the visually most appealing will be chosen. Right now only a default color set and a material design color set is supported, but you can always add your own by using the ![ColourParser](https://github.com/AbyxBelgium/Aurora/wiki/ColourParser).
 
 This code snippet is used for determining the material design color that's visually most resembles green:
 ```java
