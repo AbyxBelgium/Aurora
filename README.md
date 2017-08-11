@@ -3,6 +3,9 @@ The Aurora library allows for manipulating bitmaps and images in a programmatica
 
 **DISCLAIMER: Please note that Aurora is currently still in alpha-status and that some bugs might still be present. All features described in this document are working and tested, but it's possible for some bugs to have been overlooked. Please report any issues in the issue tracker.**
 
+## Requirements:
+Aurora only supports API 20 or higher. This is due to the fact that we use RenderScript with some features that are only available on Lollipop or higher.
+
 ## Installation:
 Aurora is available from jCenter. Just add the following line to your build.gradle:
 
