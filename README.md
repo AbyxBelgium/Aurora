@@ -18,7 +18,7 @@ Crop images to only include the interesting part (without a big border of whites
 ![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/crop_rectangular.png)
 ### Shape background
 Draw a shape (with a specific padding) around a bitmap. Aurora supports both circles as rectangles at the moment.
-![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/shape_render.png)
+![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/render_shape.png)
 ## Quickstart
 Coming soon...
 ## Speed
