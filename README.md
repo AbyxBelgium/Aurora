@@ -40,3 +40,6 @@ int closestColor = materialPalette.matchToClosestColour(Color.GREEN);
 ```
 
 ## Speed
+Aurora is fully built with speed in mind and uses RenderScript. This allows us to speed up all computations by using the device's built-in GPU. Following are some speed tests that were performed on a OnePlus 3T and a Nexus 5.
+
+Coming soon...
