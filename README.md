@@ -28,7 +28,10 @@ Crop images to only include the interesting part (without a big border of whites
 ![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/crop_rectangular.png)
 ### Shape background
 Draw a shape (with a specific padding) around a bitmap. Aurora supports both circles as rectangles at the moment.
-![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/render_shape.png)
+![Shapes](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/render_shape.png)
+###
+True masive parallelism! Aurora's processes for manipulating images and rendering backgrounds scale to use 100's of cores (GPU!) and are being processed very fast!
+![Parallelism](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/parallelism.png)
 ## Quickstart
 ### Find closest color in a set
 Given a specific color, packed as an Android color, find the color that resembles it the most (visually) from a specific set of colors. Aurora comes with a set of the most occurring colors and a set containing a selection of Google's material design colors.
