@@ -13,6 +13,12 @@ Aurora can also generate a blurry background that perfectly fits the color schem
 ### Automatically crop images with magic crop
 Use magic crop to automatically remove white backgrounds from logo's, illustrations, cliparts or other images. No need to manually specify bounds, Aurora will automatically detect what's part of the background of an image and what's not.
 ![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/magic_crop.png)
+### Automatically rectangular crop
+Crop images to only include the interesting part (without a big border of whitespace around them). This crop is also fully automatic and will intelligently detect the edges of an image.
+![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/crop_rectangular.png)
+### Shape background
+Draw a shape (with a specific padding) around a bitmap. Aurora supports both circles as rectangles at the moment.
+![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/shape_render.png)
 ## Quickstart
 Coming soon...
 ## Speed
