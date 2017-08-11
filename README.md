@@ -29,7 +29,7 @@ Crop images to only include the interesting part (without a big border of whites
 ### Shape background
 Draw a shape (with a specific padding) around a bitmap. Aurora supports both circles as rectangles at the moment.
 ![Shapes](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/render_shape.png)
-###
+### Masive parallelism
 True masive parallelism! Aurora's processes for manipulating images and rendering backgrounds scale to use 100's of cores (GPU!) and are being processed very fast!
 ![Parallelism](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/parallelism.png)
 ## Quickstart
