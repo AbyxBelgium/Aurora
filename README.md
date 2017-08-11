@@ -3,8 +3,18 @@ The Aurora library allows for manipulating bitmaps and images in a programmatica
 
 **DISCLAIMER: Please note that Aurora is currently still in alpha-status and that some bugs might still be present. All features described in this document are working and tested, but it's possible for some bugs to have been overlooked. Please report any issues in the issue tracker.**
 
+## Requirements:
+Aurora only supports API 20 or higher. This is due to the fact that we use RenderScript with some features that are only available on Lollipop or higher.
+
+## Installation:
+Aurora is available from jCenter. Just add the following line to your build.gradle:
+
+```
+compile 'be.abyx:aurora:0.10'
+```
+
 ## Features
-###  Find closest color in set
+###  Find closest color in a set
 Aurora can, given a specific color, determine the color that's visually the most similar and is part of some predefined set of colors (such as the set of material design colors). This allows you to create backgrounds that fit perfectly.
 ![Closest color](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/color_matcher.png)
 ### Generate blurry background based upon image
@@ -18,7 +28,21 @@ Crop images to only include the interesting part (without a big border of whites
 ![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/crop_rectangular.png)
 ### Shape background
 Draw a shape (with a specific padding) around a bitmap. Aurora supports both circles as rectangles at the moment.
-![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/shape_render.png)
+![Magic crop](https://raw.githubusercontent.com/AbyxBelgium/Aurora/master/documentation/readme/render_shape.png)
 ## Quickstart
-Coming soon...
+### Find closest color in a set
+Given a specific color, packed as an Android color, find the color that resembles it the most (visually) from a specific set of colors. Aurora comes with a set of the most occurring colors and a set containing a selection of Google's material design colors.
+
+The ColourPaletteFactory class is used for constructing a color palette. This is an object that contains all colors from which the visually most appealing will be chosen. Right now only a default color set and a material design color set is supported, but you can always add your own by using the ![ColourParser](https://github.com/AbyxBelgium/Aurora/wiki/ColourParser).
+
+This code snippet is used for determining the material design color that's visually most resembles green:
+```java
+ColourPaletteFactory factory = new ColourPaletteFactory(getApplicationContext());
+ColourPalette materialPalette = factory.getMaterialColourPalette();
+int closestColor = materialPalette.matchToClosestColour(Color.GREEN);
+```
+
 ## Speed
+Aurora is fully built with speed in mind and uses RenderScript. This allows us to speed up all computations by using the device's built-in GPU. Following are some speed tests that were performed on a OnePlus 3T and a Nexus 5.
+
+Coming soon...
