@@ -1,4 +1,4 @@
-package be.abyx.aurora;
+package be.abyx.aurora.tests;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -50,7 +50,7 @@ public class MainInstrumentedTest {
 
         assertEquals("Colour should be equal to red", Color.argb(255, 255, 0, 0), output);
 
-        Drawable greenDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.mostly_green);
+        Drawable greenDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.mostly_blue);
 
         Bitmap greenImage = ((BitmapDrawable) greenDrawable).getBitmap();
 
@@ -72,7 +72,7 @@ public class MainInstrumentedTest {
 
         Bitmap gradient = factory.createAuroraBasedUponColour(output, 400, 800);
 
-        saveImageToExternalStorage(gradient, Bitmap.CompressFormat.JPEG);
+        saveImageToExternalStorage(gradient, Bitmap.CompressFormat.PNG);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class MainInstrumentedTest {
 
         Bitmap gradient = factory.createAuroraBasedUponDrawable(redImage, new BlurryAurora(appContext), 1200, 1920);
 
-        saveImageToExternalStorage(gradient, Bitmap.CompressFormat.JPEG);
+        saveImageToExternalStorage(gradient, Bitmap.CompressFormat.PNG);
     }
 
     @Test

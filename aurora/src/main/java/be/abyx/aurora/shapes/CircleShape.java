@@ -8,7 +8,6 @@ import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.Type;
 
 import be.abyx.aurora.ScriptC_circle_render;
-import be.abyx.aurora.ScriptC_circle_render_bitmap;
 import be.abyx.aurora.shapes.ShapeType;
 import be.abyx.aurora.utilities.ResizeUtility;
 
@@ -75,41 +74,5 @@ public class CircleShape implements ShapeType {
 
     @Override
     public Bitmap renderParallelCustomBackground(Bitmap input, Bitmap backgroundImage, int padding) {
-        ResizeUtility resizeUtility = new ResizeUtility();
-
-        // We want to end up with a square Bitmap with some padding applied to it, so we use the
-        // the length of the largest dimension (width or height) as the width of our square.
-        int dimension = resizeUtility.getLargestDimension(input.getWidth(), input.getHeight()) + 2 * padding;
-
-        Bitmap output = resizeUtility.createSquareBitmapWithPadding(input, padding);
-        output.setHasAlpha(true);
-
-        RenderScript rs = RenderScript.create(this.context);
-
-        Allocation inputAlloc = Allocation.createFromBitmap(rs, output);
-        Type t = inputAlloc.getType();
-
-        Bitmap resizedBackground = Bitmap.createBitmap(backgroundImage, 0, 0, dimension, dimension);
-
-        Allocation backgroundAlloc = Allocation.createFromBitmap(rs, resizedBackground);
-
-        Allocation outputAlloc = Allocation.createTyped(rs, t);
-
-        ScriptC_circle_render_bitmap circleRenderer = new ScriptC_circle_render_bitmap(rs);
-        circleRenderer.set_centerX(dimension / 2);
-        circleRenderer.set_centerY(dimension / 2);
-        circleRenderer.set_radius(dimension / 2);
-
-        circleRenderer.forEach_circleRender(inputAlloc, backgroundAlloc, outputAlloc);
-
-        outputAlloc.copyTo(output);
-
-        inputAlloc.destroy();
-        outputAlloc.destroy();
-        backgroundAlloc.destroy();
-        circleRenderer.destroy();
-        rs.destroy();
-
-        return output;
-    }
+        throw new UnsupportedOperationException("Not yet implemented...");}
 }

@@ -40,20 +40,15 @@ public class BlurryAurora implements AuroraType {
         int[] pixels = new int[originalWidth * originalHeight];
         sourceBitmap.getPixels(pixels, 0, originalWidth, 0, 0, originalWidth, originalHeight);
 
-        // We're going to use this pixel as a reference for the hue and to determine the amount of shift that should be applied to the hue.
-        int referencePixel = pixels[0];
-
         float hueShift = getHueShift(pixels[0], colour);
         float satShift = getSaturationShift(pixels[0], colour);
 
         int[] outputPixels = new int[height * width];
 
-        DebugSystem.print("Progress 0.00%");
-
         float[] hsv = new float[3];
 
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < originalHeight; i++) {
+            for (int j = 0; j < originalWidth; j++) {
                 int pixel = pixels[i * originalWidth + j];
                 convertColorToHSV(pixel, hsv);
                 hsv[0] = (hsv[0] + hueShift) % 360;
@@ -61,17 +56,12 @@ public class BlurryAurora implements AuroraType {
                 if (satShift >= 180) {
                     hsv[1] = 0;
                 }
-
-                outputPixels[i * width + j] = Color.HSVToColor(hsv);
+                outputPixels[i * originalWidth + j] = Color.HSVToColor(hsv);
             }
-
-            double progress = ((double) i) / ((double) height);
-            DebugSystem.print("\rProgress " + String.format("%.2f", progress));
         }
 
-        DebugSystem.println("");
 
-        return Bitmap.createBitmap(outputPixels, width, height, Bitmap.Config.RGB_565);
+        return Bitmap.createBitmap(outputPixels, width, height, Bitmap.Config.ARGB_8888);
     }
 
     @Override
