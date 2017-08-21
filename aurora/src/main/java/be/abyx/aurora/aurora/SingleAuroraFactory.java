@@ -11,10 +11,10 @@ import android.support.v7.graphics.Palette;
  *
  * @author Pieter Verschaffelt
  */
-public class DefaultAuroraFactory implements AuroraFactory {
+public class SingleAuroraFactory implements AuroraFactory {
     private Context context;
 
-    public DefaultAuroraFactory(Context context) {
+    public SingleAuroraFactory(Context context) {
         this.context = context;
     }
 
