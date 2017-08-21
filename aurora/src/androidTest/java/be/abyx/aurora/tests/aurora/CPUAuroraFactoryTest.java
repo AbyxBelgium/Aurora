@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 
 import be.abyx.aurora.aurora.AuroraFactory;
 import be.abyx.aurora.aurora.BlurryAurora;
-import be.abyx.aurora.aurora.SingleAuroraFactory;
+import be.abyx.aurora.aurora.CPUAuroraFactory;
 import be.abyx.aurora.aurora.ParallelAuroraFactory;
 import be.abyx.aurora.engine.compare.BitmapComparer;
 import be.abyx.aurora.engine.compare.ColourComparer;
@@ -20,25 +20,25 @@ import be.abyx.aurora.engine.managers.AdvancedTestManager;
 import be.abyx.aurora.engine.managers.BitmapManager;
 
 /**
- * Complete unit test of all methods in the SingleAuroraFactory class. This includes also the
+ * Complete unit test of all methods in the CPUAuroraFactory class. This includes also the
  * methods that are private.
  *
  * @author Pieter Verschaffelt
  */
 @RunWith(AndroidJUnit4.class)
-public class SingleAuroraFactoryTest {
+public class CPUAuroraFactoryTest {
     // We allow for 5% variety when comparing pixel values
     public static double COLOUR_ACCURACY = 0.05;
 
     @Test
     public void testMostOccurringColourLegal() throws Exception {
         AdvancedTestManager testManager = new AdvancedTestManager();
-        Method mostOccurringColour = testManager.getMethodFromClass(SingleAuroraFactory.class, "determineDominantColour", Bitmap.class);
+        Method mostOccurringColour = testManager.getMethodFromClass(CPUAuroraFactory.class, "determineDominantColour", Bitmap.class);
 
         BitmapManager bitmapManager = new BitmapManager();
         Bitmap red = bitmapManager.getBitmapFromDrawables(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.drawable.red);
 
-        AuroraFactory factory = new SingleAuroraFactory(InstrumentationRegistry.getContext());
+        AuroraFactory factory = new CPUAuroraFactory(InstrumentationRegistry.getContext());
 
         int result = (int) mostOccurringColour.invoke(factory, red);
 
@@ -58,7 +58,7 @@ public class SingleAuroraFactoryTest {
         BitmapManager bitmapManager = new BitmapManager();
         Bitmap logo1 = bitmapManager.getBitmapFromDrawables(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.drawable.delhaize);
 
-        AuroraFactory factory = new SingleAuroraFactory(InstrumentationRegistry.getContext());
+        AuroraFactory factory = new CPUAuroraFactory(InstrumentationRegistry.getContext());
 
         Bitmap result = factory.createAuroraBasedUponDrawable(logo1, new BlurryAurora(InstrumentationRegistry.getContext()), 1200, 1920);
         Bitmap expected = bitmapManager.loadBitmap(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.raw.delhaize_blurry);

@@ -18,7 +18,7 @@ import java.util.Random;
 
 import be.abyx.aurora.aurora.AuroraFactory;
 import be.abyx.aurora.aurora.BlurryAurora;
-import be.abyx.aurora.aurora.SingleAuroraFactory;
+import be.abyx.aurora.aurora.CPUAuroraFactory;
 import be.abyx.aurora.aurora.ParallelAuroraFactory;
 import be.abyx.aurora.shapes.CircleShape;
 import be.abyx.aurora.shapes.ParallelShapeFactory;
@@ -41,7 +41,7 @@ public class MainInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red);
-        AuroraFactory factory = new SingleAuroraFactory(appContext);
+        AuroraFactory factory = new CPUAuroraFactory(appContext);
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
 
@@ -63,7 +63,7 @@ public class MainInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         Drawable redDrawable = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.red);
-        AuroraFactory factory = new SingleAuroraFactory(appContext);
+        AuroraFactory factory = new CPUAuroraFactory(appContext);
 
         Bitmap redImage = ((BitmapDrawable) redDrawable).getBitmap();
 
@@ -150,7 +150,7 @@ public class MainInstrumentedTest {
         CropUtility cropUtility = new CropUtility();
         Bitmap cropped = cropUtility.magicCrop(((BitmapDrawable) logo).getBitmap(), Color.WHITE, 0.25f);
 
-        AuroraFactory factory = new SingleAuroraFactory(appContext);
+        AuroraFactory factory = new CPUAuroraFactory(appContext);
         // Make our Bitmap large enough!
         Bitmap gradient = factory.createAuroraBasedUponColour(Color.parseColor("#4C4F5C"), 1000, 1000);
 
@@ -177,7 +177,7 @@ public class MainInstrumentedTest {
     @Test
     public void testNoiseGradient() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        AuroraFactory factory = new SingleAuroraFactory(appContext);
+        AuroraFactory factory = new CPUAuroraFactory(appContext);
         Bitmap gradient = factory.createAuroraBasedUponColour(Color.parseColor("#4C4F5C"), 1000, 1000);
 
         NoiseUtility utils = new NoiseUtility(appContext);

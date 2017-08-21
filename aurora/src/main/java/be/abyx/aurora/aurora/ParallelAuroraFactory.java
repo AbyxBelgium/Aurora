@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
  *
  * @author Pieter Verschaffelt
  */
-public class ParallelAuroraFactory extends SingleAuroraFactory {
+public class ParallelAuroraFactory extends CPUAuroraFactory {
     public ParallelAuroraFactory(Context context) {
         super(context);
     }
