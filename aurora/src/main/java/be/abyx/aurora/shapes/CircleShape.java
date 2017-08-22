@@ -25,7 +25,35 @@ public class CircleShape implements ShapeType {
 
     @Override
     public Bitmap render(Bitmap input, int backgroundColour, int padding) {
-        throw new UnsupportedOperationException("Not yet implemented... Use multithreaded version.");
+        ResizeUtility resizeUtility = new ResizeUtility();
+
+        int dimension = resizeUtility.getLargestDimension(input.getWidth(), input.getHeight() + 2 * padding);
+
+        Bitmap output = resizeUtility.createSquareBitmapWithPadding(input, padding);
+        output.setHasAlpha(true);
+
+        int[] pixels = new int[dimension * dimension];
+        output.getPixels(pixels, 0, dimension, 0, 0, dimension, dimension);
+
+        // Center of the circle
+        int centerX = dimension / 2;
+        int centerY = dimension / 2;
+        int radius = dimension / 2;
+        int squaredRadius = square(radius);
+
+        for (int x = 0; x < dimension; x++) {
+            for (int y = 0; y < dimension; y++) {
+                if (square(x - centerX) + square(y - centerY) < squaredRadius) {
+                    pixels[y * dimension + x] = backgroundColour;
+                }
+            }
+        }
+
+        return output;
+    }
+
+    private int square(int input) {
+        return (int) Math.pow(input, 2);
     }
 
     @Override

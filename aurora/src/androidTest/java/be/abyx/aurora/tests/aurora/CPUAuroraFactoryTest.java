@@ -18,6 +18,7 @@ import be.abyx.aurora.engine.compare.BitmapComparer;
 import be.abyx.aurora.engine.compare.ColourComparer;
 import be.abyx.aurora.engine.managers.AdvancedTestManager;
 import be.abyx.aurora.engine.managers.BitmapManager;
+import be.abyx.aurora.tests.TestConstants;
 
 /**
  * Complete unit test of all methods in the CPUAuroraFactory class. This includes also the
@@ -27,9 +28,6 @@ import be.abyx.aurora.engine.managers.BitmapManager;
  */
 @RunWith(AndroidJUnit4.class)
 public class CPUAuroraFactoryTest {
-    // We allow for 5% variety when comparing pixel values
-    public static double COLOUR_ACCURACY = 0.05;
-
     @Test
     public void testMostOccurringColourLegal() throws Exception {
         AdvancedTestManager testManager = new AdvancedTestManager();
@@ -64,20 +62,6 @@ public class CPUAuroraFactoryTest {
         Bitmap expected = bitmapManager.loadBitmap(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.raw.delhaize_blurry);
 
         BitmapComparer comparer = new BitmapComparer();
-        comparer.compareBitmaps(expected, result, COLOUR_ACCURACY);
-    }
-
-    @Test
-    public void testCreateAuroraBasedUponDrawableLegalGPU1() throws Exception {
-        BitmapManager bitmapManager = new BitmapManager();
-        Bitmap logo1 = bitmapManager.getBitmapFromDrawables(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.drawable.delhaize);
-
-        AuroraFactory factory = new ParallelAuroraFactory(InstrumentationRegistry.getContext());
-
-        Bitmap result = factory.createAuroraBasedUponDrawable(logo1, new BlurryAurora(InstrumentationRegistry.getContext()), 1200, 1920);
-        Bitmap expected = bitmapManager.loadBitmap(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.raw.delhaize_blurry);
-
-        BitmapComparer comparer = new BitmapComparer();
-        comparer.compareBitmaps(expected, result, COLOUR_ACCURACY);
+        comparer.compareBitmaps(expected, result, TestConstants.COLOUR_ACCURACY);
     }
 }
