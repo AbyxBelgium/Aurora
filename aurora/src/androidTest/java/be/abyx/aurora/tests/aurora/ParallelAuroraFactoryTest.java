@@ -20,7 +20,7 @@ import be.abyx.aurora.tests.TestConstants;
 @RunWith(AndroidJUnit4.class)
 public class ParallelAuroraFactoryTest  {
     @Test
-    public void testCreateAuroraBasedUponDrawableLegalGPU1() throws Exception {
+    public void testCreateAuroraBasedUponDrawableLegal() throws Exception {
         BitmapManager bitmapManager = new BitmapManager();
         Bitmap logo1 = bitmapManager.getBitmapFromDrawables(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.drawable.delhaize);
 

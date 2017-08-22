@@ -52,7 +52,7 @@ public class CPUAuroraFactoryTest {
     }
 
     @Test
-    public void testCreateAuroraBasedUponDrawableLegalCPU1() throws Exception {
+    public void testCreateAuroraBasedUponDrawableLegal() throws Exception {
         BitmapManager bitmapManager = new BitmapManager();
         Bitmap logo1 = bitmapManager.getBitmapFromDrawables(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.drawable.delhaize);
 

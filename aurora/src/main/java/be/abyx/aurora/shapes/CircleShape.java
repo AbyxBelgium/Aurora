@@ -53,7 +53,9 @@ public class CircleShape implements ShapeType {
     }
 
     private int square(int input) {
-        return (int) Math.pow(input, 2);
+        // Squaring by multiplying is faster than Math.pow. We only need to square integers and no
+        // doubles and we don't need to check for edge cases here.
+        return input * input;
     }
 
     @Override
