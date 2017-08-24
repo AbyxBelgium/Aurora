@@ -29,11 +29,8 @@ public class CircleShape implements ShapeType {
 
         int dimension = resizeUtility.getLargestDimension(input.getWidth(), input.getHeight() + 2 * padding);
 
-        Bitmap output = resizeUtility.createSquareBitmapWithPadding(input, padding);
-        output.setHasAlpha(true);
+        int[] outputPixels = resizeUtility.createSquareBitmapWithPaddingPixels(input, padding);
 
-        int[] pixels = new int[dimension * dimension];
-        output.getPixels(pixels, 0, dimension, 0, 0, dimension, dimension);
 
         // Center of the circle
         int centerX = dimension / 2;
@@ -43,13 +40,13 @@ public class CircleShape implements ShapeType {
 
         for (int x = 0; x < dimension; x++) {
             for (int y = 0; y < dimension; y++) {
-                if (square(x - centerX) + square(y - centerY) < squaredRadius) {
-                    pixels[y * dimension + x] = backgroundColour;
+                if (outputPixels[y * dimension + x] == Color.TRANSPARENT && square(x - centerX) + square(y - centerY) < squaredRadius) {
+                    outputPixels[y * dimension + x] = backgroundColour;
                 }
             }
         }
 
-        return output;
+        return Bitmap.createBitmap(outputPixels, dimension, dimension, Bitmap.Config.ARGB_8888);
     }
 
     private int square(int input) {

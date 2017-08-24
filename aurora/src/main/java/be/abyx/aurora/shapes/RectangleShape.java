@@ -25,7 +25,20 @@ public class RectangleShape implements ShapeType {
 
     @Override
     public Bitmap render(Bitmap input, int backgroundColour, int padding) {
-        throw new UnsupportedOperationException("Not yet implemented... Use multithreaded version.");
+        int[] outputPixels = createCenteredBitmapPixels(input, padding);
+
+        int width = getPaddedDimension(input.getWidth(), padding);
+        int height = getPaddedDimension(input.getHeight(), padding);
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (outputPixels[y * width + x] == Color.TRANSPARENT) {
+                    outputPixels[y * width + x] = backgroundColour;
+                }
+            }
+        }
+
+        return Bitmap.createBitmap(outputPixels, width, height, Bitmap.Config.ARGB_8888);
     }
 
     @Override
@@ -69,11 +82,15 @@ public class RectangleShape implements ShapeType {
         throw new UnsupportedOperationException("Not yet implemented... No alternative version available.");
     }
 
-    private Bitmap createCenteredBitmapWithPadding(Bitmap input, int padding) {
+    private int getPaddedDimension(int dimension, int padding) {
+        return dimension + 2 * padding;
+    }
+
+    private int[] createCenteredBitmapPixels(Bitmap input, int padding) {
         int width = input.getWidth();
         int height = input.getHeight();
 
-        int[] outputPixels = new int[(width + 2 * padding) * (height + 2 * padding)];
+        int[] outputPixels = new int[getPaddedDimension(width, padding) * getPaddedDimension(height, padding)];
 
         int[] inputPixels = new int[input.getWidth() * input.getHeight()];
         input.getPixels(inputPixels, 0, input.getWidth(), 0, 0, input.getWidth(), input.getHeight());
@@ -84,7 +101,11 @@ public class RectangleShape implements ShapeType {
                 outputPixels[(y + padding) * (width + 2 * padding) + x + padding] = inputPixels[y * input.getWidth() + x];
             }
         }
+        return outputPixels;
+    }
 
-        return Bitmap.createBitmap(outputPixels, width + 2 * padding, height + 2 * padding, Bitmap.Config.ARGB_8888);
+
+    private Bitmap createCenteredBitmapWithPadding(Bitmap input, int padding) {
+        return Bitmap.createBitmap(createCenteredBitmapPixels(input, padding), getPaddedDimension(input.getWidth(), padding), getPaddedDimension(input.getHeight(), padding), Bitmap.Config.ARGB_8888);
     }
 }

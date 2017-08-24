@@ -14,15 +14,17 @@ public class ResizeUtility {
     }
 
     /**
-     * Create a Bitmap with both the width and height equal to the largest dimension (either
-     * original width or original height) and center the original content inside of the new Bitmap.
+     * Create an array of ints representing a complete Bitmap that's based off of the input Bitmap.
+     * This method can be handy for saving memory when having to manipulate the pixels returned by
+     * this method.
      *
      * @param input The Bitmap that should be made square and centered.
      * @param padding An extra border that should be added around the original image (width in
      *                pixels).
-     * @return A new Bitmap that's square and contains the original image in the center.
+     * @return An int array representing a Bitmap that consists of the source Bitmap with an extra
+     * padding added around it.
      */
-    public Bitmap createSquareBitmapWithPadding(Bitmap input, int padding) {
+    public int[] createSquareBitmapWithPaddingPixels(Bitmap input, int padding) {
         // We want to end up with a square Bitmap with some padding applied to it, so we use the
         // the length of the largest dimension (width or height) as the width of our square.
         int dimension = getLargestDimension(input.getWidth(), input.getHeight()) + 2 * padding;
@@ -44,7 +46,22 @@ public class ResizeUtility {
             }
         }
 
-        return Bitmap.createBitmap(outputPixels, dimension, dimension, Bitmap.Config.ARGB_8888);
+        return outputPixels;
+    }
+
+
+    /**
+     * Create a Bitmap with both the width and height equal to the largest dimension (either
+     * original width or original height) and center the original content inside of the new Bitmap.
+     *
+     * @param input The Bitmap that should be made square and centered.
+     * @param padding An extra border that should be added around the original image (width in
+     *                pixels).
+     * @return A new Bitmap that's square and contains the original image in the center.
+     */
+    public Bitmap createSquareBitmapWithPadding(Bitmap input, int padding) {
+        int dimension = getLargestDimension(input.getWidth(), input.getHeight()) + 2 * padding;
+        return Bitmap.createBitmap(createSquareBitmapWithPaddingPixels(input, padding), dimension, dimension, Bitmap.Config.ARGB_8888);
     }
 
     public int getLargestDimension(int width, int height) {
