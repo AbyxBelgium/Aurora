@@ -27,7 +27,7 @@ import be.abyx.aurora.tests.TestConstants;
  * @author Pieter Verschaffelt
  */
 @RunWith(AndroidJUnit4.class)
-public class CPUAuroraFactoryTest {
+public class DefaultAuroraFactoryTest {
     @Test
     public void testMostOccurringColourLegal() throws Exception {
         AdvancedTestManager testManager = new AdvancedTestManager();
@@ -49,19 +49,5 @@ public class CPUAuroraFactoryTest {
 
         result = (int) mostOccurringColour.invoke(factory, green);
         comparer.compareColors(Color.rgb(24, 56, 96), result);
-    }
-
-    @Test
-    public void testCreateAuroraBasedUponDrawableLegal() throws Exception {
-        BitmapManager bitmapManager = new BitmapManager();
-        Bitmap logo1 = bitmapManager.getBitmapFromDrawables(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.drawable.delhaize);
-
-        AuroraFactory factory = new CPUAuroraFactory(InstrumentationRegistry.getContext());
-
-        Bitmap result = factory.createAuroraBasedUponDrawable(logo1, new BlurryAurora(InstrumentationRegistry.getContext()), 1200, 1920);
-        Bitmap expected = bitmapManager.loadBitmap(InstrumentationRegistry.getContext(), be.abyx.aurora.test.R.raw.delhaize_blurry);
-
-        BitmapComparer comparer = new BitmapComparer();
-        comparer.compareBitmaps(expected, result, TestConstants.COLOUR_ACCURACY);
     }
 }

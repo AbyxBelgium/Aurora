@@ -7,7 +7,8 @@ import be.abyx.aurora.shapes.ShapeType;
 
 /**
  * Fast implementation of the ShapeFactory that prefers the execution of massively parallel
- * implementations of renderers.
+ * implementations of renderers. Due to some bugs in Android's RenderScript implementation,
+ * it is NOT recommend to use this factory. Use the CPUShapeFactory instead!
  *
  * @author Pieter Verschaffelt
  */

@@ -20,8 +20,10 @@ import be.abyx.aurora.aurora.AuroraFactory;
 import be.abyx.aurora.aurora.BlurryAurora;
 import be.abyx.aurora.aurora.CPUAuroraFactory;
 import be.abyx.aurora.aurora.ParallelAuroraFactory;
+import be.abyx.aurora.shapes.CPUShapeFactory;
 import be.abyx.aurora.shapes.CircleShape;
 import be.abyx.aurora.shapes.ParallelShapeFactory;
+import be.abyx.aurora.shapes.RectangleShape;
 import be.abyx.aurora.shapes.ShapeFactory;
 import be.abyx.aurora.utilities.CropUtility;
 import be.abyx.aurora.utilities.NoiseUtility;
@@ -159,6 +161,17 @@ public class MainInstrumentedTest {
 
         ShapeFactory shapeFactory = new ParallelShapeFactory();
         Bitmap result = shapeFactory.createShape(new CircleShape(appContext), cropped, noise, 150);
+
+        saveImageToExternalStorage(result, Bitmap.CompressFormat.PNG);
+    }
+
+    @Test
+    public void testRectangularShape() throws Exception {
+        Drawable logo = getInstrumentation().getContext().getResources().getDrawable(be.abyx.aurora.test.R.drawable.delhaize);
+
+        ShapeFactory factory = new ParallelShapeFactory();
+        Bitmap blab = ((BitmapDrawable) logo).getBitmap();
+        Bitmap result = factory.createShape(new RectangleShape(InstrumentationRegistry.getContext()), ((BitmapDrawable) logo).getBitmap(), Color.argb(143, 255, 255, 255), 15);
 
         saveImageToExternalStorage(result, Bitmap.CompressFormat.PNG);
     }

@@ -26,9 +26,10 @@ uchar4 RS_KERNEL circleRender(uchar4 in, uint32_t x, uint32_t y) {
 
     // Check if the current coordinates fall inside the circle
     if (square(x - centerX) + square(y - centerY) < square(radius)) {
-        // Check if current position is transparent we then need to add the background!)
+        // Check if current position is transparent, we then need to add the background!)
         if (f4.a == 0) {
-            return rsPackColorTo8888(destinationR, destinationG, destinationB, destinationA);
+            uchar4 temp = rsPackColorTo8888(destinationR, destinationG, destinationB, destinationA);
+            return temp;
         }
     }
 

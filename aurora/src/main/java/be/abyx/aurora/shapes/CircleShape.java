@@ -25,6 +25,7 @@ public class CircleShape implements ShapeType {
 
     @Override
     public Bitmap render(Bitmap input, int backgroundColour, int padding) {
+
         ResizeUtility resizeUtility = new ResizeUtility();
 
         int dimension = resizeUtility.getLargestDimension(input.getWidth(), input.getHeight() + 2 * padding);

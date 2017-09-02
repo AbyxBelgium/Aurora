@@ -26,10 +26,6 @@ public class FactoryManager {
     }
 
     public ShapeFactory getRecommendedShapeFactory() {
-        if (Build.VERSION.SDK_INT < 21) {
-            return new CPUShapeFactory();
-        } else {
-            return new ParallelShapeFactory();
-        }
+        return new CPUShapeFactory();
     }
 }
