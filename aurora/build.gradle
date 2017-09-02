@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 7
-        versionName "0.13"
+        versionCode 8
+        versionName "0.14"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         renderscriptTargetApi 24
@@ -27,14 +27,14 @@ android {
 }
 
 group = 'be.abyx.aurora'
-version = '0.13'
+version = '0.14'
 
 install {
     repositories.mavenInstaller {
         pom.project {
             group 'be.abyx.aurora'
             artifactId 'aurora'
-            version '0.13'
+            version '0.14'
         }
     }
 }
@@ -52,7 +52,7 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/AbyxBelgium/Aurora.git'
         version {
-            name = '0.13'
+            name = '0.14'
             desc = 'Alpha version of Aurora.'
         }
     }
