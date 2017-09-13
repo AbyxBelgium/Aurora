@@ -4,13 +4,13 @@ The Aurora library allows for manipulating bitmaps and images in a programmatica
 **DISCLAIMER: Please note that Aurora is currently still in alpha-status and that some bugs might still be present. All features described in this document are working and tested, but it's possible for some bugs to have been overlooked. Please report any issues in the issue tracker.**
 
 ## Requirements:
-Aurora only supports API 20 or higher. This is due to the fact that we use RenderScript with some features that are only available on Lollipop or higher.
+Aurora only supports API 16 or higher. This means that Aurora is compatible with 95% of currently active Android devices.
 
 ## Installation:
 Aurora is available from jCenter. Just add the following line to your build.gradle:
 
 ```
-compile 'be.abyx:aurora:0.10'
+compile 'be.abyx:aurora:0.15'
 ```
 
 ## Features
@@ -39,6 +39,8 @@ True masive parallelism! Aurora's processes for manipulating images and renderin
 
 ![Parallelism](https://github.com/AbyxBelgium/Aurora/blob/master/documentation/readme/parallelism.png?raw=true)
 ## Quickstart
+*Last checked for Aurora v0.15*
+
 ### Find closest color in a set
 Given a specific color, packed as an Android color, find the color that resembles it the most (visually) from a specific set of colors. Aurora comes with a set of the most occurring colors and a set containing a selection of Google's material design colors.
 
@@ -57,7 +59,8 @@ There are some different factories that can be used to create renderers for blur
 ```java
 // Initialize this Bitmap yourself
 Bitmap bm;
-AuroraFactory factory = new ParallelAuroraFactory(appContext);
+FactoryManager manager = new FactoryManager();
+AuroraFactory factory = manager.getRecommendedAuroraFactory(appContext);
 Bitmap gradient = factory.createAuroraBasedUponDrawable(bm, new BlurryAurora(appContext), 1200, 1920);
 ```
 
